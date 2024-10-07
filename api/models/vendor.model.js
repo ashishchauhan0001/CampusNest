@@ -2,65 +2,82 @@ import mongoose from 'mongoose';
 
 const vendorSchema = new mongoose.Schema(
   {
-    Address1: {
+    address: {
       type: String,
       required: true,
     },
-    Rent: {
-        type: Number,
+    state: {
+        type: String,
         required: true,
       },
-    Address2: {
+    city: {
       type: String,
+      required:true,
     },
-    Security: {
+    rent: {
       type: Number,
       required: true,
     },
-    City: {
+    security: {
       type: Number,
       required: true,
     },
-    discountPrice: {
+    marketDistance: {
       type: Number,
       required: true,
     },
-    bathrooms: {
+    availRooms: {
       type: Number,
       required: true,
     },
-    bedrooms: {
+    totalRooms: {
       type: Number,
       required: true,
     },
-    furnished: {
-      type: Boolean,
-      required: true,
-    },
-    parking: {
-      type: Boolean,
-      required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-    },
-    offer: {
-      type: Boolean,
-      required: true,
-    },
-    imageUrls: {
-      type: Array,
-      required: true,
-    },
-    userRef: {
-      type: String,
-      required: true,
-    },
+    // to do 'Wi-Fi', 'Parking', 'Laundry', 'Mess', 'AC', 'Gym', 'Furnished','Electric Backup','House Keeping'
+      wifi: {
+        type: Boolean,
+        default: false,
+      },
+      parking: {
+        type: Boolean,
+        default: false,
+      },
+      laundry: {
+        type: Boolean,
+        default: false,
+      },
+      mess: {
+        type: Boolean,
+        default: false,
+      },
+      ac: {
+        type: Boolean,
+        default: false,
+      },
+      gym: {
+        type: Boolean,
+        default: false,
+      },
+      furnished: {
+        type: Boolean,
+        default: false,
+      },
+      electricBackup : {
+        type: Boolean,
+        default: false,
+      },
+      houseKeeping: {
+        type: Boolean,
+        default: false,
+      },
+      imageURL:{
+        type: Array,
+      }
   },
   { timestamps: true }
 );
 
-const Listing = mongoose.model('Listing', listingSchema);
+const VendorListing = mongoose.model('VendorListing', vendorSchema);
 
-export default Listing;
+export default VendorListing;

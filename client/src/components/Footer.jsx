@@ -6,6 +6,12 @@ function Footer() {
       {/* <hr className='dark:bg-slate-600' /> */}
       <hr className='bg-red-600' />
       <footer className="footer footer-center p-10 text-black bg-gray-100 rounded">
+
+      <div className='font-bold text-sm md:text-xl text-center p-4'>
+            <span className='text-slate-500 text-xl'>Campus</span>
+            <span className='text-red-600 text-2xl'>Nest</span>
+       </div>
+
         <nav className="grid grid-flow-col justify-center gap-5 mb-3">
           <a className="link link-hover  no-underline hover:no-underline hover:text-blue-600 transition-colors" href="#">Home</a>
           <a className="link link-hover  no-underline hover:no-underline hover:text-blue-600 transition-colors" href="#">AboutUs</a>
