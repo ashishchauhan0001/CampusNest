@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MdLocationOn } from 'react-icons/md';
+// import Footer from './Footer';
 
 export default function ListingItem({ listing }) {
   return (
@@ -47,6 +48,7 @@ export default function ListingItem({ listing }) {
           </div>
         </div>
       </Link>
+      {/* <Footer/> */}
     </div>
   );
 }
