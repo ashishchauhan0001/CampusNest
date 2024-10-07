@@ -18,7 +18,7 @@ export default function Header() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
-    console.log(currentUser,currentUser.avatar);6
+    // console.log(currentUser,currentUser.avatar);
     if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
     }
@@ -28,7 +28,7 @@ export default function Header() {
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
           <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-            <span className='text-slate-500 text-2xl'>Campus</span>
+            <span className='text-slate-500 text-xl'>Campus</span>
             <span className='text-red-600 text-2xl'>Nest</span>
           </h1>
         </Link>
@@ -39,7 +39,7 @@ export default function Header() {
           <input
             type='text'
             placeholder='Search...'
-            className='bg-transparent focus:outline-none w-24 sm:w-64'
+            className='bg-transparent focus:outline-none w-24 md:w-72'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -49,12 +49,12 @@ export default function Header() {
         </form>
         <ul className='flex gap-4'>
           <Link to='/'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
+            <li className='hidden sm:inline text-slate-700 hover:underline text-xl'>
               Home
             </li>
           </Link>
           <Link to='/about'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
+            <li className='hidden sm:inline text-slate-700 hover:underline text-xl'>
               About
             </li>
           </Link>

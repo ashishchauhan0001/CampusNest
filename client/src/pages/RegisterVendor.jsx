@@ -7,7 +7,7 @@ const RegisterVendor = () => {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [rooms, setRooms] = useState('');
 
-    const amenOptions = ['Wi-Fi', 'Parking', 'Laundry', 'Meals', 'AC', 'Gym', 'Study Room'];
+    const amenOptions = ['Wi-Fi', 'Parking', 'Laundry', 'Mess', 'AC', 'Gym', 'Furnished','Electric Backup','House Keeping'];
 
     const handleAmenityClick = (amenity) => {
         if (selectedAmenities.includes(amenity)) {
@@ -31,29 +31,29 @@ const RegisterVendor = () => {
 
     return (
         <form className="pg-form">
-            <h1 className="form-head" style={{ margin: '30px' }}>List Your Property</h1>
+            <h1 className="text-2xl text-center p-5 font-mono" >List Your Property</h1>
             <Grid container spacing={3}>
                 {/* Address Section */}
                 <Grid item xs={12} sm={6}>
                     <TextField label="Address Line 1" fullWidth required />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField label="Rent" fullWidth required type="number" />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField label="Address Line 2" fullWidth />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField label="Security" fullWidth required type="number" />
+                    <TextField label="State" required fullWidth />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField label="City" fullWidth required />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField label="Distance from Market (km)" fullWidth required />
+                    <TextField label="Rent Amount" fullWidth required type="number" />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField label="Pincode" fullWidth required />
+                    <TextField label="Security Amount" fullWidth required type="number" />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField label="Market distance(km)" fullWidth required />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField label="Available Rooms" fullWidth required type="number" />
                 </Grid>
 
                 {/* Number of Rooms Section */}
@@ -112,7 +112,7 @@ const RegisterVendor = () => {
                         style={{ margin: '0px' }}
                         onClick={() => { console.log('Form submitted with:', rooms, selectedFiles, selectedAmenities); }}
                     >
-                        Register
+                        Add
                     </Button>
                 </Grid>
             </Grid>
