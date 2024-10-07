@@ -1,0 +1,44 @@
+body {
+    background-color: #f4f4f4;
+}
+
+.pg-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 30px;
+    margin: 6vw;
+}
+
+.amenities-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.amenities-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.submit-section {
+    margin-top: 20px;
+}
+
+.photo-box {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.photo-box p {
+    margin: 0;
+    font-size: 16px;
+    color: #888;
+}
+
+.photo-box:hover {
+    background-color: #f9f9f9;
+    border-color: #aaa;
+}
