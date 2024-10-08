@@ -7,16 +7,24 @@ const RegisterVendor = () => {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [rooms, setRooms] = useState('');
     const [vendorDetails, setVendorDetails] = useState({
-        Address1: '',
-        State: '',
-        City: '',
-        Rent: '',
-        Security: '',
-        MarketDistance: '',
-        AvailableRooms: '',
-        TotalRooms: '',
-        Amenities: [],
-        Images: []
+        address: '',
+        state: '',
+        city: '',
+        rent: '',
+        security: '',
+        marketDistance: '',
+        availRooms: '',
+        totalRooms: '',
+        wifi: false,
+        parking: false,
+        laundry: false,
+        mess: false,
+        ac: false,
+        gym: false,
+        furnished: false,
+        electricBackup: false,
+        houseKeeping: false,
+        imageURL: []
     });
 
     const amenOptions = ['Wi-Fi', 'Parking', 'Laundry', 'Mess', 'AC', 'Gym', 'Furnished', 'Electric Backup', 'House Keeping'];
@@ -29,7 +37,6 @@ const RegisterVendor = () => {
             newAmenities.add(amenity); // Add if not selected
         }
         setSelectedAmenities(Array.from(newAmenities)); // Convert Set to Array and update state
-        setVendorDetails({ ...vendorDetails, Amenities: Array.from(newAmenities) });
     };
 
     const handleFileChange = (e) => {
@@ -43,7 +50,7 @@ const RegisterVendor = () => {
 
     const handleRoomsChange = (e) => {
         setRooms(e.target.value);
-        setVendorDetails({ ...vendorDetails, TotalRooms: e.target.value });
+        setVendorDetails({ ...vendorDetails, totalRooms: e.target.value });
     };
 
     const handleInputChange = (e) => {
@@ -52,51 +59,46 @@ const RegisterVendor = () => {
     };
 
     const addVendor = async () => {
-        let responseData;
         let formData = new FormData();
-        
-        // Append selected images to formData
+    
+        // Append all vendor details to FormData
+        formData.append('address', vendorDetails.address);
+        formData.append('state', vendorDetails.state);
+        formData.append('city', vendorDetails.city);
+        formData.append('rent', vendorDetails.rent);
+        formData.append('security', vendorDetails.security);
+        formData.append('marketDistance', vendorDetails.marketDistance);
+        formData.append('availRooms', vendorDetails.availRooms);
+        formData.append('totalRooms', vendorDetails.totalRooms);
+    
+        // Append selected amenities to FormData
+        selectedAmenities.forEach((amenity) => {
+            formData.append('amenities[]', amenity);
+        });
+    
+        // Append selected images to FormData
         selectedFiles.forEach((file) => {
             formData.append('images', file);
         });
-
-        // Upload images
-        await fetch('http://localhost:5173/upload', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-            },
-            body: formData,
-        })
-            .then((resp) => resp.json())
-            .then((data) => {
-                responseData = data;
-            });
-
-        if (responseData.success) {
-            // If images are successfully uploaded, update vendor details with image URLs
-            const imageUrls = responseData.image_urls;
-            setVendorDetails({ ...vendorDetails, Images: imageUrls });
-
-            // Now send the full vendor details to the server
-            await fetch('http://localhost:5173/addvendor', {
+    
+        try {
+            const response = await fetch('http://localhost:3000/api/vendor/addvendor', {
                 method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ ...vendorDetails, Images: imageUrls }),
-            })
-                .then((resp) => resp.json())
-                .then((data) => {
-                    if (data.success) {
-                        alert('Vendor Registered Successfully');
-                    } else {
-                        alert('Failed to Register Vendor');
-                    }
-                });
+                body: formData,
+            });
+            const data = await response.json();
+    
+            if (data.success) {
+                alert('Vendor Registered Successfully');
+            } else {
+                alert('Failed to Register Vendor: ' + data.message); // Log detailed error message
+            }
+        } catch (error) {
+            console.error('Error registering vendor:', error); // Catch and log fetch errors
+            alert('Failed to Register Vendor: Network or Server error');
         }
     };
+    
 
     return (
         <form className="pg-form">
@@ -108,7 +110,7 @@ const RegisterVendor = () => {
                         label="Address Line 1"
                         fullWidth
                         required
-                        name="Address1"
+                        name="address"
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -117,7 +119,7 @@ const RegisterVendor = () => {
                         label="State"
                         required
                         fullWidth
-                        name="State"
+                        name="state"
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -126,7 +128,7 @@ const RegisterVendor = () => {
                         label="City"
                         fullWidth
                         required
-                        name="City"
+                        name="city"
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -136,7 +138,7 @@ const RegisterVendor = () => {
                         fullWidth
                         required
                         type="number"
-                        name="Rent"
+                        name="rent"
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -146,7 +148,7 @@ const RegisterVendor = () => {
                         fullWidth
                         required
                         type="number"
-                        name="Security"
+                        name="security"
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -155,7 +157,7 @@ const RegisterVendor = () => {
                         label="Market distance(km)"
                         fullWidth
                         required
-                        name="MarketDistance"
+                        name="marketDistance"
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -165,7 +167,7 @@ const RegisterVendor = () => {
                         fullWidth
                         required
                         type="number"
-                        name="AvailableRooms"
+                        name="availRooms"
                         onChange={handleInputChange}
                     />
                 </Grid>

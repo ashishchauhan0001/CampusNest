@@ -1,103 +1,76 @@
-import express from 'express';
-import cors from 'cors';
-import VendorListing from '../models/vendor.model.js'; // Your vendor model file path
+import VendorListing from '../models/vendor.model.js';
+import { errorHandler } from '../utils/error.js';
 
-const router = express.Router();
-const app = express();
-
-app.use(express.json()); // Middleware to parse incoming JSON requests
-app.use(cors()); // Middleware for handling CORS
-
-// Mount the router
-app.use('/', router);
-
-// POST API for adding a new vendor listing
-router.post('/addvendor', async (req, res) => {
+// Create a new vendor listing (similar to createListing)
+export const addVendor = async (req, res, next) => {
     try {
-        let vendors = await VendorListing.find({}); // Retrieve all listings from the database
-        let id;
+        const vendor = await VendorListing.create(req.body);
+        return res.status(201).json(vendor);
+    }catch (error) {
+        next(error);
+    }
+};
 
-        if (vendors.length > 0) {
-            let last_vendor = vendors[vendors.length - 1]; // Get the last vendor in the array
-            id = last_vendor.id + 1; // Increment the ID
-        } else {
-            id = 1; // Start from ID 1 if no vendors exist
+// Delete vendor listing (similar to deleteListing)
+export const removeVendor = async (req, res, next) => {
+    const vendor = await VendorListing.findById(req.params.id);
+
+    if (!vendor) {
+        return next(errorHandler(404, 'Vendor listing not found!'));
+    }
+
+
+    try {
+        await VendorListing.findByIdAndDelete(req.params.id);
+        res.status(200).json('Vendor listing has been removed!');
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Update vendor listing (similar to updateListing)
+export const updateVendor = async (req, res, next) => {
+    const vendor = await VendorListing.findById(req.params.id);
+    
+    if (!vendor) {
+        return next(errorHandler(404, 'Vendor listing not found!'));
+    }
+
+
+
+    try {
+        const updatedVendor = await VendorListing.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json(updatedVendor);
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Get a single vendor listing (similar to getListing)
+export const getVendor = async (req, res, next) => {
+    try {
+        const vendor = await VendorListing.findById(req.params.id);
+        if (!vendor) {
+            return next(errorHandler(404, 'Vendor listing not found!'));
         }
-
-        const vendor = new VendorListing({
-            id: id,
-            address: req.body.address, // Ensure these match your request body
-            state: req.body.state,
-            city: req.body.city,
-            rent: req.body.rent,
-            security: req.body.security,
-            marketDistance: req.body.marketDistance,
-            availRooms: req.body.availRooms,
-            totalRooms: req.body.totalRooms,
-            wifi: req.body.wifi,
-            parking: req.body.parking,
-            laundry: req.body.laundry,
-            mess: req.body.mess,
-            ac: req.body.ac,
-            gym: req.body.gym,
-            furnished: req.body.furnished,
-            electricBackup: req.body.electricBackup,
-            houseKeeping: req.body.houseKeeping,
-            imageURL: req.body.imageURL
-        });
-
-        await vendor.save(); // Save the vendor listing
-        console.log("Vendor listing saved");
-
-        res.json({
-            success: true,
-            message: "Vendor listing added successfully",
-        });
+        res.status(200).json(vendor);
     } catch (error) {
-        console.error("Error saving vendor listing:", error);
-        res.status(500).json({
-            success: false,
-            message: "Failed to save vendor listing",
-        });
+        next(error);
     }
-});
+};
 
-// POST API for removing a vendor listing
-router.post('/removevendor', async (req, res) => {
+// Get all vendor listings (similar to getListings)
+export const getVendors = async (req, res, next) => {
     try {
-        await VendorListing.findOneAndDelete({ id: req.body.id });
-        console.log("Vendor listing removed");
-        res.json({
-            success: true,
-            message: "Vendor listing removed successfully",
-        });
+        const limit = parseInt(req.query.limit) || 9;
+        const startIndex = parseInt(req.query.startIndex) || 0;
+
+        const vendors = await VendorListing.find({})
+            .limit(limit)
+            .skip(startIndex);
+        return res.status(200).json(vendors);
     } catch (error) {
-        console.error("Error removing vendor listing:", error);
-        res.status(500).json({
-            success: false,
-            message: "Failed to remove vendor listing",
-        });
+        next(error);
     }
-});
+};
 
-// GET API for fetching all vendor listings
-router.get('/allvendors', async (req, res) => {
-    try {
-        let vendors = await VendorListing.find({});
-        console.log("All Vendor Listings Fetched");
-        res.json(vendors);
-    } catch (error) {
-        console.error("Error fetching vendors:", error);
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch vendor listings",
-        });
-    }
-});
-
-// Start the server
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-});
-
-export default router;
