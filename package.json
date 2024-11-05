@@ -21,6 +21,8 @@
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.8.2",
-    "nodemon": "^3.1.7"
+    "navigation": "^6.2.0",
+    "nodemon": "^3.1.7",
+    "swiper": "^11.1.14"
   }
 }

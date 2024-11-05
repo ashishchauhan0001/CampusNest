@@ -1,17 +1,32 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import SwiperCore from 'swiper';
-import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
 import Footer from '../components/Footer';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
+import SwiperCore from 'swiper';
+
+SwiperCore.use([Navigation]);
+
+
+
 
 export default function Home() {
+
+
+  const images = [
+    'https://cdn.pixabay.com/photo/2024/06/14/19/14/house-8830418_1280.jpg',
+    'https://cdn.pixabay.com/photo/2024/04/27/05/58/ai-generated-8723070_1280.jpg',
+    'https://cdn.pixabay.com/photo/2018/09/25/09/17/sale-3701777_1280.jpg',
+    'https://cdn.pixabay.com/photo/2023/07/27/19/57/castle-8153987_1280.jpg',
+  ];
+
+
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
-  SwiperCore.use([Navigation]);
   console.log(offerListings);
   useEffect(() => {
     const fetchOfferListings = async () => {
@@ -51,40 +66,40 @@ export default function Home() {
       {/* top */}
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
         <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>
-          Find your next <span className='text-slate-500'>perfect</span>
+          Find your next <span className='text-slate-700'>perfect</span>
           <br />
-          place with ease
+          <span className='text-red-600'>place with ease</span>
         </h1>
-        <div className='text-gray-400 text-xs sm:text-sm'>
-          Sahand Estate is the best place to find your next perfect place to
+        <div className='text-gray-900 text-xl md:text-lg'>
+          CampusNest is the best place to find your next perfect place to
           live.
           <br />
           We have a wide range of properties for you to choose from.
         </div>
         <Link
           to={'/search'}
-          className='text-xs sm:text-sm text-blue-800 font-bold hover:underline'
+          className='text-xs md:text-lg text-blue-800 font-bold hover:underline'
         >
           Let's get started...
         </Link>
       </div>
 
       {/* swiper */}
-      <Swiper navigation>
-        {offerListings &&
-          offerListings.length > 0 &&
-          offerListings.map((listing) => (
-            <SwiperSlide>
-              <div
-                style={{
-                  background: `url(${listing.imageUrls[0]}) center no-repeat`,
-                  backgroundSize: 'cover',
-                }}
-                className='h-[500px]'
-                key={listing._id}
-              ></div>
-            </SwiperSlide>
-          ))}
+      <Swiper 
+      spaceBetween={30}
+        navigation
+        loop={true} // Allows continuous loop sliding
+        className='mySwiper'
+      >
+        {images.map((url, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={url}
+              alt={`Slide ${index}`}
+              className='w-full h-[500px] object-cover'
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       {/* listing results for offer, sale and rent */}
