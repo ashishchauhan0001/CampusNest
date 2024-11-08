@@ -1,0 +1,39 @@
+.dash {
+    margin-top: 1vh;
+    width: 250px;
+    height: 91vh;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    border-radius: 30px;
+}
+
+.dash h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.dash ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dash ul li {
+    margin: 2em 0;
+}
+
+.dash ul li :hover {
+    background-color: #ff9f00;
+}
+
+.dash ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    
+}
+
+.dash ul li a:hover {
+    color: #ff9f00;
+}

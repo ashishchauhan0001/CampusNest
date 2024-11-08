@@ -11,19 +11,24 @@ import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
 import RegisterVendor from './pages/RegisterVendor';
+import Land from './pages/land';
+import BuildProfile from './pages/BuildProfile';
+import Dash from './pages/vendor/dash';
 
 export default function App() {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Land />} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/about' element={<About />} />
         <Route path='/search' element={<Search />} />
         <Route path='/vend' element={<RegisterVendor />} />
         <Route path='/listing/:listingId' element={<Listing />} />
+        <Route path='/build' element={<BuildProfile />} />
+        <Route path='/show' element={<Dash />} />
 
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />

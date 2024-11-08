@@ -2,6 +2,235 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background-color: rgb(241, 245, 241);
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    width: 100%;
+
+}
+
+
+.topSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 40vh;
+
+    width: 97vw;
+
+    background-color: #f4f4f4;
+
+}
+
+
+.leftText {
+    flex: 1;
+    font-size: 2rem;
+    padding: 20px;
+}
+
+
+.rightText {
+    flex: 1;
+    text-align: right;
+    padding: 20px;
+    font-size: 2.2rem;
+}
+
+.animatedText {
+
+    animation: fadeInOut 9s infinite;
+}
+
+.text1 {
+    animation-delay: 0s;
+}
+
+.text2 {
+    animation-delay: 3s;
+}
+
+.text3 {
+    animation-delay: 6s;
+}
+
+
+@keyframes fadeInOut {
+
+    0%,
+    33% {
+        opacity: 1;
+    }
+
+    66%,
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.bottomSection {
+    height: 50vh;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/public/bg6.png');
+    background-size: cover;
+    border-radius: 30px;
+}
+
+
+.bottomSection .bottomSearch {
+    margin-top: 13vw;
+
+
+}
+
+
+
+.road-container {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.page-title {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.road {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.city {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 30px;
+    position: relative;
+}
+
+.city-circle {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.city p {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #555;
+}
+
+.road-line {
+    height: 5px;
+    width: 100px;
+    background-color: #4CAF50;
+    position: absolute;
+    top: 25px;
+    left: 55px;
+}
+
+
+
+
+
+.map-container {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.page-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 
+  **************************************************************************
+  
+  ABOUT 
+  
+  ************************************************************************** */
+
+
+.about-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 70vh;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 20px;
+}
+
+.feature-box {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 250px;
+
+    transition: box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.feature-box h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    color: #FF5733;
+
+}
+
+.feature-box p {
+    font-size: 1rem;
+    color: #555;
 }

@@ -2,12 +2,30 @@ import VendorListing from '../models/vendor.model.js';
 import { errorHandler } from '../utils/error.js';
 
 // Create a new vendor listing (similar to createListing)
+// export const addVendor = async (req, res, next) => {
+//     try {
+//         const vendor = await VendorListing.create(req.body);
+//         return res.status(201).json(vendor);
+//     } catch (error) {
+//         console.log(error,68)
+//         next(error);
+//     }
+// };
 export const addVendor = async (req, res, next) => {
     try {
         const vendor = await VendorListing.create(req.body);
-        return res.status(201).json(vendor);
-    }catch (error) {
-        next(error);
+        return res.status(201).json({
+            success: true,
+            message: "Vendor added successfully",
+            vendor
+        });
+    } catch (error) {
+        console.error("Error adding vendor:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to add vendor. Please try again later.",
+            error: error.message // Consider omitting this in production for security
+        });
     }
 };
 
@@ -31,7 +49,7 @@ export const removeVendor = async (req, res, next) => {
 // Update vendor listing (similar to updateListing)
 export const updateVendor = async (req, res, next) => {
     const vendor = await VendorListing.findById(req.params.id);
-    
+
     if (!vendor) {
         return next(errorHandler(404, 'Vendor listing not found!'));
     }
