@@ -1,7 +1,19 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema, isValidObjectId } from 'mongoose';
 
 const vendorSchema = new mongoose.Schema(
   {
+    vendorId:{
+      type:Schema.Types.ObjectId
+    },
+    name: {
+      type: String,
+      required: true,
+    
+    },
+    description: {
+      type: String,
+      
+    },
     address: {
       type: String,
       required: true,

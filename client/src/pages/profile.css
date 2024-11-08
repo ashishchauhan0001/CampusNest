@@ -1,0 +1,45 @@
+body {
+    background-color: #f4f4f4;
+}
+
+.profile-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 30px;
+    margin: 6vw;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.details-section {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.submit-section {
+    margin-top: 20px;
+}
+
+.aadhaar-upload-box {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.aadhaar-upload-box p {
+    margin: 0;
+    font-size: 16px;
+    color: #888;
+}
+
+.aadhaar-upload-box:hover {
+    background-color: #f9f9f9;
+    border-color: #aaa;
+}

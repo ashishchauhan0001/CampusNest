@@ -1,4 +1,5 @@
 import Listing from '../models/listing.model.js';
+import VendorListing from '../models/vendor.model.js';
 import { errorHandler } from '../utils/error.js';
 
 export const createListing = async (req, res, next) => {
@@ -96,13 +97,15 @@ export const getListings = async (req, res, next) => {
 
     const order = req.query.order || 'desc';
 
-    const listings = await Listing.find({
-      name: { $regex: searchTerm, $options: 'i' },
-      offer,
-      furnished,
-      parking,
-      type,
-    })
+    const listings = await Listing.find(
+      {
+        name: { $regex: searchTerm, $options: 'i' },
+        offer,
+        furnished,
+        parking,
+        type,
+      }
+    )
       .sort({ [sort]: order })
       .limit(limit)
       .skip(startIndex);
