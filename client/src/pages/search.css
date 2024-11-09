@@ -80,6 +80,7 @@
 .listings {
     flex: 1;
     padding: 20px;
+    font-size: x-large;
     color: #333; /* Dark text for the main content area */
 }
 
