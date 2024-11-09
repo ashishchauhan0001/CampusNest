@@ -62,42 +62,26 @@ export const getVendor = async (req, res, next) => {
 };
 
 // Get all vendor listings
-export const getVendors = async (req, res, next) => {
+export const getVendors = async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 8;
     const startIndex = parseInt(req.query.startIndex) || 0;
 
-    // Safer JSON parsing
+    // Parse amenities from JSON string in query
     let amenities = {};
     try {
       amenities = JSON.parse(req.query.amenities || "{}");
     } catch (error) {
-      return next(errorHandler(400, "Invalid amenities format."));
+      return res.status(400).json({ message: "Invalid amenities format." });
     }
 
-    // Helper function to parse boolean values correctly
-    const parseBoolean = (value) => {
-      if (value === "true") return true;
-      if (value === "false") return false;
-      return undefined;
-    };
-
-    // Construct filters with parsed boolean values
-    const filters = {
-      ...(parseBoolean(amenities.parking) !== undefined && { parking: parseBoolean(amenities.parking) }),
-      ...(parseBoolean(amenities.furnished) !== undefined && { furnished: parseBoolean(amenities.furnished) }),
-      ...(parseBoolean(amenities.wifi) !== undefined && { wifi: parseBoolean(amenities.wifi) }),
-      ...(parseBoolean(amenities.mess) !== undefined && { mess: parseBoolean(amenities.mess) }),
-      ...(parseBoolean(amenities.gym) !== undefined && { gym: parseBoolean(amenities.gym) }),
-      ...(parseBoolean(amenities.ac) !== undefined && { ac: parseBoolean(amenities.ac) }),
-      ...(parseBoolean(amenities.electricBackup) !== undefined && { electricBackup: parseBoolean(amenities.electricBackup) }),
-      ...(parseBoolean(amenities.laundry) !== undefined && { laundry: parseBoolean(amenities.laundry) }),
-      ...(parseBoolean(amenities.houseKeeping) !== undefined && { houseKeeping: parseBoolean(amenities.houseKeeping) }),
-    };
-
-    // Debug logs
-    console.log("Parsed Amenities:", amenities);
-    console.log("Constructed Filters:", filters);
+    // Construct filters for amenities with true values only
+    const filters = {};
+    Object.keys(amenities).forEach((key) => {
+      if (amenities[key] === true) {
+        filters[key] = true;
+      }
+    });
 
     const searchTerm = req.query.searchTerm || "";
     const sortField = req.query.sort || "createdAt";
@@ -105,18 +89,19 @@ export const getVendors = async (req, res, next) => {
 
     // MongoDB query
     const listings = await VendorListing.find({
-      name: { $regex: searchTerm, $options: "i" },
+      $or: [
+        { name: { $regex: searchTerm, $options: "i" } },
+        { address: { $regex: searchTerm, $options: "i" } }
+      ],
       ...filters,
     })
-      .sort({ [sortField]: order })
+      .sort({ rent : order })
       .limit(limit)
       .skip(startIndex);
-
-    console.log("Listings:", listings);
 
     res.status(200).json(listings);
   } catch (error) {
     console.error("Error fetching vendors:", error);
-    next(errorHandler(500, "Failed to fetch vendors."));
+    res.status(500).json({ message: "Failed to fetch vendors." });
   }
 };

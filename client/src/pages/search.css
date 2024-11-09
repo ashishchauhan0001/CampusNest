@@ -77,12 +77,15 @@
 }
 
 /* Listings Section */
+
 .listings {
-    flex: 1;
-    padding: 20px;
-    font-size: x-large;
-    color: #333; /* Dark text for the main content area */
+    display: flex;
+    flex-wrap: wrap; /* Space between the cards */
+    gap: 10px;
+    margin-top: 40px;
 }
+
+
 
 .loading-text {
     text-align: center;
