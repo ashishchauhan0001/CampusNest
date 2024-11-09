@@ -14,6 +14,7 @@ import RegisterVendor from './pages/RegisterVendor';
 import Land from './pages/land';
 import BuildProfile from './pages/BuildProfile';
 import Dash from './pages/vendor/dash';
+import Property from './pages/Property';
 
 export default function App() {
   return (
@@ -26,7 +27,8 @@ export default function App() {
         <Route path='/about' element={<About />} />
         <Route path='/search' element={<Search />} />
         <Route path='/vend' element={<RegisterVendor />} />
-        <Route path='/listing/:listingId' element={<Listing />} />
+        <Route path='/property/:listingId' element={<Property />} />
+        {/* <Route path='/listing/:listingId' element={<Listing />} /> */}
         <Route path='/build' element={<BuildProfile />} />
         <Route path='/show' element={<Dash />} />
 
