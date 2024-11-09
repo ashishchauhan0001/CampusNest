@@ -394,7 +394,7 @@ export default function Search() {
     
 
     // const res = await fetch(`/api/listing/get?${searchQuery}`);
-    const res = await fetch(`/api/listing/allvendors?${searchQuery}`);
+    const res = await fetch(`http://localhost:3000/api/vendor/allvendors?${searchQuery}`);
     const data = await res.json();
     console.log(data);
     
@@ -519,13 +519,15 @@ export default function Search() {
         </form>
       </div>
 
+      
        <div className="listings">
-        <h1>Listing results:</h1>
+        
         {loading ? (
           <p className="loading-text">Loading...</p>
         ) : listings.length === 0 ? (
           <p>No listing found!</p>
-        ) : (
+        ) :  (
+          
           listings.map((listing) => <Card key={listing._id} listing={listing} />)
           //  Card 
         )}

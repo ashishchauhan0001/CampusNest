@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MdLocationOn } from 'react-icons/md';
+import { MdLocationOn,MdFoodBank,MdWindPower  } from 'react-icons/md';
 import { FaWifi, FaParking, FaCouch, FaBolt, FaSwimmingPool } from 'react-icons/fa';
 import { GiVacuumCleaner, GiWashingMachine } from 'react-icons/gi';
 import { BiDumbbell } from 'react-icons/bi';
@@ -70,9 +70,14 @@ export default function Card({ listing }) {
                 <FaParking className='text-yellow-600' /> Parking
               </div>
             )}
-            {listing.ac && (
+            {listing.electricBackup && (
               <div className='flex items-center gap-1'>
-                <FaBolt className='text-red-500' /> AC
+                <FaBolt className='text-red-500' /> E.Backup
+              </div>
+            )}
+             {listing.ac && (
+              <div className='flex items-center gap-1'>
+                <MdWindPower  className='text-red-500' /> AC
               </div>
             )}
             {listing.gym && (
@@ -93,6 +98,11 @@ export default function Card({ listing }) {
             {listing.furnished && (
               <div className='flex items-center gap-1'>
                 <FaCouch className='text-brown-700' /> Furnished
+              </div>
+            )}
+             {listing.mess && (
+              <div className='flex items-center gap-1'>
+                <MdFoodBank  className='text-green-700' /> Mess
               </div>
             )}
           </div>
