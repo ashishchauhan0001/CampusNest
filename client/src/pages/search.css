@@ -11,12 +11,12 @@
     padding: 20px;
     border-right: 2px solid #ddd;
     min-width: 250px;
-    background-color: #333;
-    color: #f0f0f0; /* Light text for readability */
+    background-color: #f6e9e9;
+    color: #111010; /* Light text for readability */
     border-radius: 30px;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    height: 90vh;
+    margin-top: 40px;
+    /* margin-bottom: 1vh; */
+    height: auto;
 }
 
 .search-form {
@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    color: #f0f0f0; /* Light text for form labels */
+    color: #090202; /* Light text for form labels */
 }
 
 .form-group input,
@@ -43,7 +43,7 @@
 }
 
 .form-group input::placeholder {
-    color: #ccc; /* Subtle placeholder color */
+    color: #f9f1f1; /* Subtle placeholder color */
 }
 
 /* Checkbox Group */
@@ -51,7 +51,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    color: #f0f0f0; /* Light text for checkboxes */
+    color: #0d0c0c; /* Light text for checkboxes */
 }
 
 .checkbox-group div {
