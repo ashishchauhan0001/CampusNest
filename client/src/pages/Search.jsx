@@ -270,12 +270,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 import './search.css'; 
+import Card from '../components/Card.jsx'
 
 export default function Search() {
   const navigate = useNavigate();
   const [sidebardata, setSidebardata] = useState({
     searchTerm: '',
-    type: 'all',
+    // type: 'all',
     amenities: {
       parking: false,
       furnished: false,
@@ -283,9 +284,9 @@ export default function Search() {
       mess: false,
       gym: false,
       ac: false,
-      backup: false,
+      electricBackup: false,
       laundry: false,
-      keeping: false,
+      houseKeeping: false,
     },
     sort: 'created_at',
     order: 'desc',
@@ -298,21 +299,21 @@ export default function Search() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
-    const typeFromUrl = urlParams.get('type');
+    // const typeFromUrl = urlParams.get('type');
     const amenitiesFromUrl = urlParams.get('amenities');
     const sortFromUrl = urlParams.get('sort');
     const orderFromUrl = urlParams.get('order');
 
     if (
       searchTermFromUrl ||
-      typeFromUrl ||
+      // typeFromUrl ||
       amenitiesFromUrl ||
       sortFromUrl ||
       orderFromUrl
     ) {
       setSidebardata({
         searchTerm: searchTermFromUrl || '',
-        type: typeFromUrl || 'all',
+        // type: typeFromUrl || 'all',
         amenities: amenitiesFromUrl ? JSON.parse(amenitiesFromUrl) : sidebardata.amenities,
         sort: sortFromUrl || 'created_at',
         order: orderFromUrl || 'desc',
@@ -323,8 +324,13 @@ export default function Search() {
       setLoading(true);
       setShowMore(false);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/listing/get?${searchQuery}`);
+      console.log("TESTING : - ", searchQuery);
+      
+      // const res = await fetch(`/api/listing/get?${searchQuery}`);
+      const res = await fetch(`/api/listing/allvendors?${searchQuery}`);
       const data = await res.json();
+      console.log("DATA : ", data);
+      
       if (data.length > 8) {
         setShowMore(true);
       } else {
@@ -359,16 +365,16 @@ export default function Search() {
       });
     }
 
-    if (id === 'type') {
-      setSidebardata({ ...sidebardata, type: value });
-    }
+    // if (id === 'type') {
+    //   setSidebardata({ ...sidebardata, type: value });
+    // }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
     urlParams.set('searchTerm', sidebardata.searchTerm);
-    urlParams.set('type', sidebardata.type);
+    // urlParams.set('type', sidebardata.type);
     urlParams.set('amenities', JSON.stringify(sidebardata.amenities));
     urlParams.set('sort', sidebardata.sort);
     urlParams.set('order', sidebardata.order);
@@ -383,8 +389,14 @@ export default function Search() {
     urlParams.set('startIndex', startIndex);
     const searchQuery = urlParams.toString();
     
-    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    console.log(searchQuery,"Next Data");
+    
+
+    // const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const res = await fetch(`/api/listing/allvendors?${searchQuery}`);
     const data = await res.json();
+    console.log(data);
+    
     
     if (data.length < 9) {
       setShowMore(false);
@@ -466,9 +478,9 @@ export default function Search() {
             <div>
               <input
                 type="checkbox"
-                id="backup"
+                id="electricBackup"
                 onChange={handleChange}
-                checked={sidebardata.amenities.backup}
+                checked={sidebardata.amenities.electricBackup}
               />
               <span>Electricity Backup</span>
             </div>
@@ -484,9 +496,9 @@ export default function Search() {
             <div>
               <input
                 type="checkbox"
-                id="keeping"
+                id="houseKeeping"
                 onChange={handleChange}
-                checked={sidebardata.amenities.keeping}
+                checked={sidebardata.amenities.houseKeeping}
               />
               <span>House Keeping</span>
             </div>
@@ -506,14 +518,15 @@ export default function Search() {
         </form>
       </div>
 
-      <div className="listings">
+      {/* <div className="listings">
         <h1>Listing results:</h1>
         {loading ? (
           <p className="loading-text">Loading...</p>
         ) : listings.length === 0 ? (
           <p>No listing found!</p>
         ) : (
-          listings.map((listing) => <ListingItem key={listing._id} listing={listing} />)
+          listings.map((listing) => <Card key={listing._id} listing={listing} />)
+          //  Card 
         )}
 
         {showMore && (
@@ -521,7 +534,7 @@ export default function Search() {
             Show more
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

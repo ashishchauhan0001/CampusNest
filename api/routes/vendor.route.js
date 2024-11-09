@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.post('/addvendor', addVendor);
 router.post('/removevandor/:id', verifyToken, removeVendor);
-router.get('/onevendor/:id', verifyToken, getVendor);
-router.get('/allvendors', verifyToken, getVendors);
 router.post('/updatevendor/:id', verifyToken, updateVendor);
+router.get('/getvendor/:id', getVendor);
+router.get('/allvendors', getVendors);
 
 export default router;
