@@ -7,7 +7,8 @@ import { BiDumbbell } from 'react-icons/bi';
 export default function Card({ listing }) {
   return (
     <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
-      <Link to={`/listing/${listing._id}`}>
+      {/* <Link to={`/listing/${listing._id}`}> */}
+      <Link to={`/property/${listing._id}`}>
         {/* Image Section */}
         <img
           src={
