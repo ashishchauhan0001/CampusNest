@@ -1,16 +1,7 @@
 import VendorListing from "../models/vendor.model.js";
 import { errorHandler } from "../utils/error.js";
 
-// Create a new vendor listing (similar to createListing)
-// export const addVendor = async (req, res, next) => {
-//     try {
-//         const vendor = await VendorListing.create(req.body);
-//         return res.status(201).json(vendor);
-//     } catch (error) {
-//         console.log(error,68)
-//         next(error);
-//     }
-// };
+// Add a new vendor listing
 export const addVendor = async (req, res, next) => {
   try {
     const vendor = await VendorListing.create(req.body);
@@ -21,51 +12,43 @@ export const addVendor = async (req, res, next) => {
     });
   } catch (error) {
     console.error("Error adding vendor:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Failed to add vendor. Please try again later.",
-      error: error.message, // Consider omitting this in production for security
-    });
+    next(errorHandler(500, "Failed to add vendor. Please try again later."));
   }
 };
 
-// Delete vendor listing (similar to deleteListing)
+// Delete a vendor listing
 export const removeVendor = async (req, res, next) => {
-  const vendor = await VendorListing.findById(req.params.id);
-
-  if (!vendor) {
-    return next(errorHandler(404, "Vendor listing not found!"));
-  }
-
   try {
+    const vendor = await VendorListing.findById(req.params.id);
+    if (!vendor) {
+      return next(errorHandler(404, "Vendor listing not found!"));
+    }
     await VendorListing.findByIdAndDelete(req.params.id);
-    res.status(200).json("Vendor listing has been removed!");
+    res.status(200).json({ success: true, message: "Vendor listing has been removed!" });
   } catch (error) {
-    next(error);
+    next(errorHandler(500, "Failed to remove vendor."));
   }
 };
 
-// Update vendor listing (similar to updateListing)
+// Update a vendor listing
 export const updateVendor = async (req, res, next) => {
-  const vendor = await VendorListing.findById(req.params.id);
-
-  if (!vendor) {
-    return next(errorHandler(404, "Vendor listing not found!"));
-  }
-
   try {
+    const vendor = await VendorListing.findById(req.params.id);
+    if (!vendor) {
+      return next(errorHandler(404, "Vendor listing not found!"));
+    }
     const updatedVendor = await VendorListing.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
-    res.status(200).json(updatedVendor);
+    res.status(200).json({ success: true, vendor: updatedVendor });
   } catch (error) {
-    next(error);
+    next(errorHandler(500, "Failed to update vendor."));
   }
 };
 
-// Get a single vendor listing (similar to getListing)
+// Get a single vendor listing
 export const getVendor = async (req, res, next) => {
   try {
     const vendor = await VendorListing.findById(req.params.id);
@@ -74,94 +57,66 @@ export const getVendor = async (req, res, next) => {
     }
     res.status(200).json(vendor);
   } catch (error) {
-    next(error);
+    next(errorHandler(500, "Failed to fetch vendor."));
   }
 };
 
-// Get all vendor listings (similar to getListings)
-// export const getVendors = async (req, res, next) => {
-//     try {
-//         const limit = parseInt(req.query.limit) || 9;
-//         const startIndex = parseInt(req.query.startIndex) || 0;
-
-//         const vendors = await VendorListing.find({})
-//             .limit(limit)
-//             .skip(startIndex);
-//         return res.status(200).json(vendors);
-//     } catch (error) {
-//         next(error);
-//     }
-// };
-
+// Get all vendor listings
 export const getVendors = async (req, res, next) => {
-    console.log("Hello World");
-    
   try {
-    const limit = parseInt(req.query.limit) || 9;
+    const limit = parseInt(req.query.limit) || 8;
     const startIndex = parseInt(req.query.startIndex) || 0;
-    
-    let parking=req.query.parking;
-    if (parking === undefined || parking === 'false') {
-        parking = { $in: [false, true] };
-      }
 
-    let furnished=req.query.furnished;
-    if (furnished === undefined || furnished === 'false') {
-        furnished = { $in: [false, true] };
-      }
-    let wifi=req.query.wifi;
-    if (wifi === undefined || wifi === 'false') {
-        wifi = { $in: [false, true] };
-      }
-    let mess=req.query.mess;
-    if (mess === undefined || mess === 'false') {
-        mess = { $in: [false, true] };
-      }
-    let gym=req.query.gym;
-    if (gym === undefined || gym === 'false') {
-        gym = { $in: [false, true] };
-      }
-    let ac=req.query.ac;
-    if (ac === undefined || ac === 'false') {
-        ac = { $in: [false, true] };
-      }
-    let electricBackup=req.query.electricBackup;
-    if (electricBackup === undefined || electricBackup === 'false') {
-        electricBackup = { $in: [false, true] };
-      }
-    let laundry=req.query.laundry;
-    if (laundry === undefined || laundry === 'false') {
-        laundry = { $in: [false, true] };
-      }
-    let houseKeeping=req.query.houseKeeping;
-    if (houseKeeping === undefined || houseKeeping === 'false') {
-        houseKeeping = { $in: [false, true] };
-      }
+    // Safer JSON parsing
+    let amenities = {};
+    try {
+      amenities = JSON.parse(req.query.amenities || "{}");
+    } catch (error) {
+      return next(errorHandler(400, "Invalid amenities format."));
+    }
 
-    const searchTerm = req.query.searchTerm || '';
-    const sort = req.query.sort || "createdAt";
-    const order = req.query.order || "desc";
+    // Helper function to parse boolean values correctly
+    const parseBoolean = (value) => {
+      if (value === "true") return true;
+      if (value === "false") return false;
+      return undefined;
+    };
 
-    const listings = await VendorListing.find(
-        {
-            name:{$regex: searchTerm, $options: 'i'},
-            parking,
-            furnished,
-            wifi,
-            mess,
-            gym,
-            ac,
-            electricBackup,
-            laundry,
-            houseKeeping,
-        }
-    )
-      .sort({ [sort]: order })
+    // Construct filters with parsed boolean values
+    const filters = {
+      ...(parseBoolean(amenities.parking) !== undefined && { parking: parseBoolean(amenities.parking) }),
+      ...(parseBoolean(amenities.furnished) !== undefined && { furnished: parseBoolean(amenities.furnished) }),
+      ...(parseBoolean(amenities.wifi) !== undefined && { wifi: parseBoolean(amenities.wifi) }),
+      ...(parseBoolean(amenities.mess) !== undefined && { mess: parseBoolean(amenities.mess) }),
+      ...(parseBoolean(amenities.gym) !== undefined && { gym: parseBoolean(amenities.gym) }),
+      ...(parseBoolean(amenities.ac) !== undefined && { ac: parseBoolean(amenities.ac) }),
+      ...(parseBoolean(amenities.electricBackup) !== undefined && { electricBackup: parseBoolean(amenities.electricBackup) }),
+      ...(parseBoolean(amenities.laundry) !== undefined && { laundry: parseBoolean(amenities.laundry) }),
+      ...(parseBoolean(amenities.houseKeeping) !== undefined && { houseKeeping: parseBoolean(amenities.houseKeeping) }),
+    };
+
+    // Debug logs
+    console.log("Parsed Amenities:", amenities);
+    console.log("Constructed Filters:", filters);
+
+    const searchTerm = req.query.searchTerm || "";
+    const sortField = req.query.sort || "createdAt";
+    const order = req.query.order === "asc" ? 1 : -1;
+
+    // MongoDB query
+    const listings = await VendorListing.find({
+      name: { $regex: searchTerm, $options: "i" },
+      ...filters,
+    })
+      .sort({ [sortField]: order })
       .limit(limit)
       .skip(startIndex);
 
-    return res.status(200).json(listings);
+    console.log("Listings:", listings);
+
+    res.status(200).json(listings);
   } catch (error) {
-    next(error);
+    console.error("Error fetching vendors:", error);
+    next(errorHandler(500, "Failed to fetch vendors."));
   }
 };

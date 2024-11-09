@@ -327,7 +327,8 @@ export default function Search() {
       console.log("TESTING : - ", searchQuery);
       
       // const res = await fetch(`/api/listing/get?${searchQuery}`);
-      const res = await fetch(`/api/listing/allvendors?${searchQuery}`);
+      const res = await fetch(`http://localhost:3000/api/vendor/allvendors?${searchQuery}`);
+      console.log("RESPONSE : ", res);
       const data = await res.json();
       console.log("DATA : ", data);
       
@@ -518,7 +519,7 @@ export default function Search() {
         </form>
       </div>
 
-      {/* <div className="listings">
+       <div className="listings">
         <h1>Listing results:</h1>
         {loading ? (
           <p className="loading-text">Loading...</p>
@@ -534,7 +535,7 @@ export default function Search() {
             Show more
           </button>
         )}
-      </div> */}
+      </div> 
     </div>
   );
 }
