@@ -23,11 +23,9 @@ function Showtenant() {
             try {
                 // Call the API to fetch tenant data
                 const response = await axios.get(`http://localhost:3000/api/request/getrequest/${userId}`);
+                
                 const tenants = response.data.request.map(req => req.tenantData.tenant);
-               
-                // console.log(" RESPONSE1 : ", response.data.request[0].tenantData.tenant);
-                // console.log(" RESPONSE2 : ", response.data.request[1].tenantData.tenant);
-                console.log("DATA : ", response);
+                console.log("DATA : ", response.data.request[0].tenantData.userID);
                 
                 
                 if (response.status === 201) {
