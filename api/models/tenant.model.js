@@ -7,6 +7,9 @@ const tenantSchema= new mongoose.Schema(
             type:String,
             required:true,
         },
+        userID:{
+           type:Schema.Types.ObjectId,
+        },
         address:{
             type:String,
             required:true,

@@ -188,6 +188,7 @@
 // export default Property;
 
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Card, Typography, Grid, Box, Divider } from '@mui/material';
@@ -195,8 +196,12 @@ import Carousel from 'react-material-ui-carousel';
 import './property.css';
 import { Chip } from '@mui/material';
 
+// const userDetails = useSelector((state) => state.user.currentUser);
+// const id = userDetails._id;
 
 const Property = () => {
+    const userDetails = useSelector((state) => state.user.currentUser);
+    const id = userDetails._id;
     const params = useParams();
     const [property, setProperty] = useState(null);
     const [error, setError] = useState(null);
@@ -214,9 +219,36 @@ const Property = () => {
 
         fetchProperty();
     }, [params.listingId]);
-    const handleBookingRequest = () => {
-        // Add booking request logic here
+
+    
+    const handleBookingRequest = async () => {
+        try {
+          
+            const response = await axios.get(`http://localhost:3000/api/tenant/gettenant/${id}`); 
+    
+            if (response.status === 200) {
+                const tenantData = response.data; 
+                console.log("Tenant Profile Data:", tenantData);
+                const data={
+                    "vendorId":id,
+                    "tenantData":tenantData.tenant,
+                }
+                console.log("My data : ",data);
+                const postResponse = await axios.post('http://localhost:3000/api/request/addrequest',data);
+    
+                if (postResponse.status === 201) {
+                    console.log("Data successfully sent and stored in the database:", postResponse.data);
+                } else {
+                    console.error("Failed to store data in the database:", postResponse.statusText);
+                }
+            } else {
+                console.error("Failed to fetch tenant profile data:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error while fetching tenant profile data:", error.message);
+        }
     };
+    
 
     return (
 
