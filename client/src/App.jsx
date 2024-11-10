@@ -16,6 +16,7 @@ import BuildProfile from './pages/BuildProfile';
 import Dash from './pages/vendor/dash';
 import Property from './pages/Property';
 import Showlist from './pages/vendor/Showlist';
+import Showtenant from './pages/vendor/Showtenant'
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
         <Route path='/build' element={<BuildProfile />} />
         <Route path='/show' element={<Dash />} />
         <Route path='/viewlist' element={<Showlist />} />
+        <Route path='/view-tenants' element={<Showtenant />} />
 
 
         <Route element={<PrivateRoute />}>

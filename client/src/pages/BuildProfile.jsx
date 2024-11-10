@@ -5,7 +5,6 @@ import axios from 'axios';
 import { storage } from '../firebase.js';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './profile.css';
-import { useSelector } from 'react-redux';
 
 const BuildProfile = () => {
     const userDetails = useSelector((state) => state.user.currentUser);
