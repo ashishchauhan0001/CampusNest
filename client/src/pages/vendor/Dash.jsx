@@ -8,7 +8,7 @@ const Dash = () => {
        
             <ul>
                 <li>
-                    <Link to="/view-listings">View Listings</Link>
+                    <Link to="/viewlist">View Listings</Link>
                 </li>
                 <li>
                     <Link to="/vend">Create Listing</Link>

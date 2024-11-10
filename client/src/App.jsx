@@ -15,6 +15,7 @@ import Land from './pages/land';
 import BuildProfile from './pages/BuildProfile';
 import Dash from './pages/vendor/dash';
 import Property from './pages/Property';
+import Showlist from './pages/vendor/Showlist';
 
 export default function App() {
   return (
@@ -31,6 +32,8 @@ export default function App() {
         {/* <Route path='/listing/:listingId' element={<Listing />} /> */}
         <Route path='/build' element={<BuildProfile />} />
         <Route path='/show' element={<Dash />} />
+        <Route path='/viewlist' element={<Showlist />} />
+
 
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
