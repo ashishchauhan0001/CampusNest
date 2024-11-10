@@ -11,7 +11,7 @@ const Showlist = () => {
     const id = userDetails._id;
     console.log(id);
     const [properties, setProperties] = useState([]);
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchProperties = async () => {

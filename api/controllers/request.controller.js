@@ -15,3 +15,17 @@ export const addRequest =async(req,res,next)=>{
     next(errorHandler(500,"Failed to  make a request.Pls Try again Later."));
    }
 }
+
+export const getRequest =async(req,res,next)=>{
+   try {
+    const request=await requestData.find({vendorId:req.params.id});
+    return res.status(201).json({
+        success: true,
+        message:" Data Fetched Successfully",
+        request,
+   })
+   } catch (error) {
+    console.error(" Error in Fetching Data: ", error);
+    next(errorHandler(500,"Failed to Fetch the data.Pls Try again Later."));
+   }
+}
