@@ -1,49 +1,76 @@
 import React, { useState } from 'react';
-import { Button, TextField, Grid } from '@mui/material';
+import { Button, TextField, Chip, Grid } from '@mui/material';
 import axios from 'axios';
+import { storage } from '../firebase.js';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './profile.css';
 
 const BuildProfile = () => {
     const [tenantDetails, setTenantDetails] = useState({
         name: '',
         address: '',
-        aadhaarNumber: '',
+        designation: '',
+        aadhaarNo: '',
         organization: '',
-        skills: '',
-        experience: '',
+        skills: [],
+        experience: 0,
     });
-    const [aadhaarPhoto, setAadhaarPhoto] = useState(null);
+    const [aadhaarURL, setAadhaarURL] = useState(null);
+    const [skillInput, setSkillInput] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setTenantDetails({ ...tenantDetails, [name]: value });
     };
 
-    const handleAadhaarPhotoChange = (e) => {
-        setAadhaarPhoto(e.target.files[0]);
+    const handleSkillInputChange = (e) => {
+        setSkillInput(e.target.value);
     };
 
-    const handleProfileSubmit = async () => {
-        const formData = new FormData();
-        formData.append('name', tenantDetails.name);
-        formData.append('address', tenantDetails.address);
-        formData.append('aadhaarNumber', tenantDetails.aadhaarNumber);
-        formData.append('organization', tenantDetails.organization);
-        formData.append('skills', tenantDetails.skills);
-        formData.append('experience', tenantDetails.experience);
-
-        // Append Aadhaar photo if selected
-        if (aadhaarPhoto) {
-            formData.append('aadhaarPhoto', aadhaarPhoto);
+    const addSkill = (e) => {
+        if (e.key === 'Enter' && skillInput.trim()) {
+            setTenantDetails((prevState) => ({
+                ...prevState,
+                skills: [...prevState.skills, skillInput.trim()],
+            }));
+            setSkillInput('');
         }
+    };
 
+    const removeSkill = (index) => {
+        setTenantDetails((prevState) => ({
+            ...prevState,
+            skills: prevState.skills.filter((_, i) => i !== index),
+        }));
+    };
+
+    const handleAadhaarURL = (e) => {
+        setAadhaarURL(e.target.files[0]);
+    };
+
+    const uploadAadhaarImage = async () => {
+        if (!aadhaarURL) return null;
+        
+        const storageRef = ref(storage, `aadhaar/${Date.now()}_${aadhaarURL.name}`);
+        await uploadBytes(storageRef, aadhaarURL);
+        const url = await getDownloadURL(storageRef);
+        return url;
+    };
+    console.log("Tenant Data : ", tenantDetails);
+    console.log("URL : ", aadhaarURL);
+    
+    
+    const handleProfileSubmit = async () => {
         try {
-            const response = await axios.post('http://localhost:3000/api/tenant/createprofile', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const aadhaarImageURL = await uploadAadhaarImage();
+            console.log("URL : ", aadhaarImageURL);
+            
+            const profileData = {
+                ...tenantDetails,
+                aadhaarURL: aadhaarImageURL, // Add uploaded Aadhaar image URL
+            };
 
+            const response = await axios.post('http://localhost:3000/api/tenant/addtenant', profileData);
             if (response.data.success) {
                 alert('Profile created successfully');
             } else {
@@ -65,6 +92,7 @@ const BuildProfile = () => {
                         fullWidth
                         required
                         name="name"
+                        value={tenantDetails.name}
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -74,6 +102,7 @@ const BuildProfile = () => {
                         fullWidth
                         required
                         name="address"
+                        value={tenantDetails.address}
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -83,6 +112,7 @@ const BuildProfile = () => {
                         fullWidth
                         required
                         name="designation"
+                        value={tenantDetails.designation}
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -91,7 +121,8 @@ const BuildProfile = () => {
                         label="Aadhaar Number"
                         fullWidth
                         required
-                        name="aadhaarNumber"
+                        name="aadhaarNo"
+                        value={tenantDetails.aadhaarNo}
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -101,42 +132,54 @@ const BuildProfile = () => {
                         fullWidth
                         required
                         name="organization"
+                        value={tenantDetails.organization}
                         onChange={handleInputChange}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        label="Skills"
+                        label="Add Skill"
                         fullWidth
-                        required
-                        name="skills"
-                        onChange={handleInputChange}
+                        value={skillInput}
+                        onChange={handleSkillInputChange}
+                        onKeyDown={addSkill}
+                        placeholder="Type a skill and press Enter"
                     />
+                    <div className="skills-chips">
+                        {tenantDetails.skills.map((skill, index) => (
+                            <Chip
+                                key={index}
+                                label={skill}
+                                onDelete={() => removeSkill(index)}
+                                color="primary"
+                                style={{ margin: '5px' }}
+                            />
+                        ))}
+                    </div>
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        label="Experience"
+                        label="Experience (years)"
                         type="number"
                         fullWidth
                         required
                         name="experience"
+                        value={tenantDetails.experience}
                         onChange={handleInputChange}
                     />
                 </Grid>
 
-                {/* Aadhaar Photo Upload Section */}
                 <Grid item xs={12}>
                     <div className="photo-upload">
                         <p>Upload Aadhaar Photo</p>
                         <input
                             type="file"
                             accept="image/*"
-                            onChange={handleAadhaarPhotoChange}
+                            onChange={handleAadhaarURL}
                         />
                     </div>
                 </Grid>
 
-                {/* Submit Button */}
                 <Grid item xs={12} className="submit-box">
                     <Button
                         variant="contained"
