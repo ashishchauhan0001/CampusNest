@@ -51,12 +51,15 @@ export const updateVendor = async (req, res, next) => {
 // Get a single vendor listing
 export const getVendor = async (req, res, next) => {
   try {
+
     const vendor = await VendorListing.find({
       $or: [
         { _id: req.params.id },
         { vendorId: req.params.id }
       ]
     });
+
+
     if (!vendor) {
       return next(errorHandler(404, "Vendor listing not found!"));
     }
