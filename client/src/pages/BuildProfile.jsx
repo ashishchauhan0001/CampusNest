@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Button, TextField, Chip, Grid } from '@mui/material';
 import axios from 'axios';
 import { storage } from '../firebase.js';
@@ -6,8 +7,11 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './profile.css';
 
 const BuildProfile = () => {
+    const userDetails = useSelector((state) => state.user.currentUser);
+    const id = userDetails._id;
     const [tenantDetails, setTenantDetails] = useState({
         name: '',
+        userID: id,
         address: '',
         designation: '',
         aadhaarNo: '',
