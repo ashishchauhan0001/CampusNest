@@ -268,7 +268,7 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ListingItem from '../components/ListingItem';
+
 import './search.css'; 
 import Card from '../components/Card.jsx'
 
@@ -299,7 +299,7 @@ export default function Search() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
-    // const typeFromUrl = urlParams.get('type');
+
     const amenitiesFromUrl = urlParams.get('amenities');
     const sortFromUrl = urlParams.get('sort');
     const orderFromUrl = urlParams.get('order');

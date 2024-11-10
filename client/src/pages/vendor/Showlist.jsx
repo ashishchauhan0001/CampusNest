@@ -40,7 +40,7 @@ const Showlist = () => {
                     {
                         Array.isArray(properties) && properties.length > 0 
                         ? properties.map((property) => <Card key={property._id} listing={property} />)
-                        : <p>No properties available</p> // or loading state if properties are being fetched
+                        : <p>No properties available</p> 
                     }
                 </div>
             </>

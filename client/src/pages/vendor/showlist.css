@@ -1,4 +1,10 @@
+
 .main-box {
     margin-left: 20vw;
     margin-top: 5vh;
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap;
+    gap: 30px; 
+    padding: 20px;
 }

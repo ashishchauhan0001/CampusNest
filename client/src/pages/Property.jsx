@@ -300,7 +300,7 @@ const Property = () => {
                     <Divider sx={{ my: 2 }} />
 
                     {/* Additional Information */}
-                    <Typography variant="h6">Property Information</Typography>
+                    {/* <Typography variant="h6">Property Information</Typography>
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <Typography variant="body1">Rent: ₹{property[0].rent}</Typography>
@@ -320,13 +320,42 @@ const Property = () => {
                         <Grid item xs={6}>
                             <Typography variant="body1">Nearby Market: {property[0].marketDistance} km</Typography>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
+                            <div className="property-info-container">
+            <h2 className="property-title">Property Information</h2>
+            <div className="property-info">
+                <div className="property-info-item">
+                    <span className="info-label">Rent:</span>
+                    <span className="info-value">₹{property[0].rent}</span>
+                </div>
+                <div className="property-info-item">
+                    <span className="info-label">Security:</span>
+                    <span className="info-value">₹{property[0].security}</span>
+                </div>
+                <div className="property-info-item">
+                    <span className="info-label">Available Rooms:</span>
+                    <span className="info-value">{property[0].availRooms}</span>
+                </div>
+                <div className="property-info-item">
+                    <span className="info-label">City:</span>
+                    <span className="info-value">{property[0].city}</span>
+                </div>
+                <div className="property-info-item">
+                    <span className="info-label">State:</span>
+                    <span className="info-value">{property[0].state}</span>
+                </div>
+                <div className="property-info-item">
+                    <span className="info-label">Nearby Market:</span>
+                    <span className="info-value">{property[0].marketDistance} km</span>
+                </div>
+            </div>
+        </div>
 
                     {/* Divider */}
                     <Divider sx={{ my: 2 }} />
 
                     {/* Amenities */}
-                    <Typography variant="h6">Amenities</Typography>
+                    <h2 className="amenities-title">WHAT DOES IT OFFER??</h2>
 
                     <Grid container spacing={2} className="amenities-list">
                         {property[0].ac && <Chip label="AC" color="primary" sx={{ mt: 3 }} />}
