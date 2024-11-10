@@ -1,12 +1,13 @@
 .dash {
     margin-top: 1vh;
     width: 250px;
-    height: 91vh;
-    background-color: #333;
-    color: white;
+    height: 100%;
     padding: 20px;
     position: fixed;
+    background-color: white;
     border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .dash h2 {
@@ -21,6 +22,7 @@
 
 .dash ul li {
     margin: 2em 0;
+    color: #ff9f00;
 }
 
 .dash ul li :hover {
@@ -28,12 +30,22 @@
 }
 
 .dash ul li a {
-    color: white;
+    display: block;
+    color: black;
     text-decoration: none;
     font-size: 1.1em;
-    
+    padding: 12px 15px;
+    /* Add padding for space around the text */
+    width: 100%;
+    /* Makes anchor take full width of the sidebar */
+    box-sizing: border-box;
+    /* Ensure padding doesn’t affect width */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+
 .dash ul li a:hover {
-    color: #ff9f00;
+    background: linear-gradient(90deg, #4a90e2, #a63db4, #f66d6d);
+    color: white;
 }

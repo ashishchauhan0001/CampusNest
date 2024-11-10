@@ -1,7 +1,8 @@
 /* Header.css */
 
 header {
-    background-color: #e2e8f0;
+    /* background-color: #e2e8f0; */
+    background: linear-gradient(109.2deg, rgb(254, 3, 104) 9.3%, rgb(103, 3, 255) 89.5%);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -20,12 +21,14 @@ header {
 }
 
 .logo span:first-child {
-    color: #64748b;
+    /* color: #64748b; */
+    color: white;
     font-size: 1.25rem;
 }
 
 .logo span:last-child {
-    color: #dc2626;
+    /* color: #dc2626; */
+    color: black;
     font-size: 1.5rem;
 }
 
@@ -60,7 +63,8 @@ header {
 }
 
 .link {
-    color: #334155;
+    /* color: #334155; */
+    color: white;
     font-size: 1.25rem;
 
 }

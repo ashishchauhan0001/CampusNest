@@ -2,13 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-code {
+/* code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
-}
+} */
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+code {
+    font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
 body {
     background-color: #f4f4f4;
+    font-family: 'Times New Roman', Georgia, serif;
+    
+
 }
 
 
@@ -117,6 +125,7 @@ body {
     font-size: 36px;
     margin-bottom: 40px;
     color: #333;
+    
 }
 
 .road {
@@ -175,6 +184,7 @@ body {
     font-size: 36px;
     margin-bottom: 20px;
     color: #333;
+    
 }
 
 /* 
@@ -207,6 +217,7 @@ body {
 
 .feature-box {
     background-color: #ffffff;
+    
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;

@@ -91,6 +91,10 @@
 
  */
 
+.amenities-title{
+    font-size: 2rem;
+    text-align: center;
+}
 
 .property-container {
     max-width: 1200px;
@@ -142,3 +146,48 @@
     font-size: 18px;
 }
 
+.property-info-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 70vw;
+    margin: auto;
+}
+
+.property-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.property-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.property-info-item {
+    flex: 1 1 45%;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.info-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+}
