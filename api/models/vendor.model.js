@@ -2,29 +2,30 @@ import mongoose, { Schema, isValidObjectId } from 'mongoose';
 
 const vendorSchema = new mongoose.Schema(
   {
-    vendorId:{
-      type:Schema.Types.ObjectId
+    vendorId: {
+      type: Schema.Types.ObjectId
+
     },
     name: {
       type: String,
       required: true,
-    
+
     },
     description: {
       type: String,
-      
+
     },
     address: {
       type: String,
       required: true,
     },
     state: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
     city: {
       type: String,
-      required:true,
+      required: true,
     },
     rent: {
       type: Number,
@@ -47,45 +48,45 @@ const vendorSchema = new mongoose.Schema(
       required: true,
     },
     // to do 'Wi-Fi', 'Parking', 'Laundry', 'Mess', 'AC', 'Gym', 'Furnished','Electric Backup','House Keeping'
-      wifi: {
-        type: Boolean,
-        default: false,
-      },
-      parking: {
-        type: Boolean,
-        default: false,
-      },
-      laundry: {
-        type: Boolean,
-        default: false,
-      },
-      mess: {
-        type: Boolean,
-        default: false,
-      },
-      ac: {
-        type: Boolean,
-        default: false,
-      },
-      gym: {
-        type: Boolean,
-        default: false,
-      },
-      furnished: {
-        type: Boolean,
-        default: false,
-      },
-      electricBackup : {
-        type: Boolean,
-        default: false,
-      },
-      houseKeeping: {
-        type: Boolean,
-        default: false,
-      },
-      imageURL:{
-        type: Array,
-      }
+    wifi: {
+      type: Boolean,
+      default: false,
+    },
+    parking: {
+      type: Boolean,
+      default: false,
+    },
+    laundry: {
+      type: Boolean,
+      default: false,
+    },
+    mess: {
+      type: Boolean,
+      default: false,
+    },
+    ac: {
+      type: Boolean,
+      default: false,
+    },
+    gym: {
+      type: Boolean,
+      default: false,
+    },
+    furnished: {
+      type: Boolean,
+      default: false,
+    },
+    electricBackup: {
+      type: Boolean,
+      default: false,
+    },
+    houseKeeping: {
+      type: Boolean,
+      default: false,
+    },
+    imageURL: {
+      type: Array,
+    }
   },
   { timestamps: true }
 );
