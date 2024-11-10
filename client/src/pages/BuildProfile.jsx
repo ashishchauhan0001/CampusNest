@@ -8,9 +8,12 @@ import './profile.css';
 
 const BuildProfile = () => {
     const userDetails = useSelector((state) => state.user.currentUser);
+    
     const id = userDetails._id;
     const [tenantDetails, setTenantDetails] = useState({
+        
         name: '',
+        userImg:userDetails.avatar,
         userID: id,
         address: '',
         designation: '',
