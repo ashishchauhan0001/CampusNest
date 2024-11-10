@@ -51,7 +51,7 @@ export const updateVendor = async (req, res, next) => {
 // Get a single vendor listing
 export const getVendor = async (req, res, next) => {
   try {
-    const vendor = await VendorListing.findById(req.params.id);
+    const vendor = await VendorListing.find({vendorId:req.params.id});
     if (!vendor) {
       return next(errorHandler(404, "Vendor listing not found!"));
     }
