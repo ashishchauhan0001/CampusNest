@@ -1,47 +1,51 @@
-import mongoose,{Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 
-const tenantSchema= new mongoose.Schema(
+const tenantSchema = new mongoose.Schema(
     {
-        name:{
-            type:String,
-            required:true,
+        name: {
+            type: String,
+            required: true,
         },
-        userID:{
-           type:Schema.Types.ObjectId,
+        userImg: {
+            type: String
+
         },
-        address:{
-            type:String,
-            required:true,
+        userID: {
+            type: Schema.Types.ObjectId,
         },
-        designation:{
-            type:String,
-            required:true,
+        address: {
+            type: String,
+            required: true,
         },
-        aadhaarNo:{
-            type:Number,
-            required:true,
+        designation: {
+            type: String,
+            required: true,
         },
-        organization:{
-            type:String,
-            required:true,
+        aadhaarNo: {
+            type: Number,
+            required: true,
         },
-        skills:{
+        organization: {
+            type: String,
+            required: true,
+        },
+        skills: {
             type: Array,
             required: true,
         },
-        experience:{
-            type:Number,
-            required:true,
+        experience: {
+            type: Number,
+            required: true,
         },
-        aadhaarURL:{
-            type:String,
+        aadhaarURL: {
+            type: String,
         }
     },
-    {timestamps:true}
+    { timestamps: true }
 );
 
-const tenantProfile=mongoose.model('tenantProfile',
+const tenantProfile = mongoose.model('tenantProfile',
     tenantSchema);
-  
+
 export default tenantProfile;    
