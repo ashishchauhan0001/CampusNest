@@ -58,7 +58,60 @@ function Showtenant() {
     console.log(tenantData, 900);
 
     return (
+        // <Box sx={{ padding: 4 }}>
+        //     {error && (
+        //         <Typography color="error" sx={{ mb: 2 }}>
+        //             {error}
+        //         </Typography>
+        //     )}
+        //     {tenantData ? (
+        //         <Card variant="outlined" sx={{ mb: 3 }}>
+        //             <Grid container alignItems="center" spacing={2}>
+        //                 {/* Avatar Section */}
+        //                 <Grid item xs={2}>
+        //                     <Avatar
+        //                         src={tenantData.aadhaarURL}
+        //                         alt="Aadhaar Image"
+        //                         sx={{ width: 64, height: 64 }}
+        //                     />
+        //                 </Grid>
 
+        //                 {/* Tenant Details Section */}
+        //                 <Grid item xs={10}>
+        //                     <CardContent>
+        //                         <Typography variant="h6" sx={{ mb: 1 }}>
+        //                             Name: {tenantData.name}
+        //                         </Typography>
+        //                         <Grid container spacing={2}>
+        //                             <Grid item xs={3}>
+        //                                 <Typography variant="body1">
+        //                                     <strong>Organization:</strong> {tenantData.organization}
+        //                                 </Typography>
+        //                             </Grid>
+        //                             <Grid item xs={3}>
+        //                                 <Typography variant="body1">
+        //                                     <strong>Skills:</strong> {tenantData.skills}
+        //                                 </Typography>
+        //                             </Grid>
+        //                             <Grid item xs={3}>
+        //                                 <Typography variant="body1">
+        //                                     <strong>Experience:</strong> {tenantData.experience} years
+        //                                 </Typography>
+        //                             </Grid>
+        //                             <Grid item xs={3}>
+        //                                 <Typography variant="body1">
+        //                                     <strong>Start Date:</strong> {new Date(tenantData.createdAt).toLocaleDateString()}
+        //                                 </Typography>
+        //                             </Grid>
+        //                         </Grid>
+        //                     </CardContent>
+        //                 </Grid>
+        //             </Grid>
+        //         </Card>
+        //     ) : (
+        //         <Typography variant="body1">Loading tenant data...</Typography>
+        //     )}
+        // </Box>
 
         <>
             <Dash />
@@ -68,6 +121,7 @@ function Showtenant() {
                         {error}
                     </Typography>
                 )}
+                {console.log("Tenant data ", tenantData)}
                 {tenantData && tenantData.length > 0 ? (
                     tenantData.map((tenant) => (
                         <div key={tenant._id} className="tenant-card">
