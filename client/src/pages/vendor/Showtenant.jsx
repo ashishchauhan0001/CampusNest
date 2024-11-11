@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Typography, Box, Grid, Card, CardContent, Avatar } from '@mui/material';
 import { GiConsoleController } from 'react-icons/gi';
-import "./showlist.css"
+import "./showlist.css";
 import Dash from './dash';
 
 function Showtenant() {
@@ -15,7 +15,6 @@ function Showtenant() {
     const userId = userDetails?._id;
     console.log("User ID : ", userId);
 
-
     useEffect(() => {
         const checkTenant = async () => {
             if (!userId) {
@@ -26,25 +25,12 @@ function Showtenant() {
             try {
                 // Call the API to fetch tenant data
                 const response = await axios.get(`http://localhost:3000/api/request/getrequest/${userId}`);
-                
                 const tenants = response.data.request.map(req => req.tenantData.tenant);
-
-
-
-                // console.log(" RESPONSE1 : ", response.data.request[0].tenantData.tenant);
-                // console.log(" RESPONSE2 : ", response.data.request[1].tenantData.tenant);
-
-
-
-
 
                 if (response.status === 201) {
                     setTenantData(response.data.request);
-
-
-
                 } else {
-                    console.log("NO Tenant data found:");
+                    console.log("No tenant data found:");
                     setError('No tenant data found for this user.');
                 }
             } catch (err) {
@@ -52,67 +38,38 @@ function Showtenant() {
                 setError('Failed to fetch tenant data. Please try again later.');
             }
         };
-
         checkTenant();
     }, [userId]);
     console.log(tenantData, 900);
 
+    // Handle click for Accept or Reject
+    const handleClick = async (status, id) => {
+        console.log("Status : ", status ," ID : ",id);
+        
+        try {
+            // API call to update the tenant status
+            const response = await axios.put(`http://localhost:3000/api/request/updateStatus/${id}`, {
+                status: status, // 'accepted' or 'rejected'
+            });
+
+            if (response.status === 200) {
+                alert(`Tenant request ${status} successfully.`);
+                // Update the local state to reflect the change
+                setTenantData(prevData =>
+                    prevData.map(tenant =>
+                        tenant._id === id ? { ...tenant, status: status } : tenant
+                    )
+                );
+            } else {
+                alert(`Failed to update the status. Please try again.`);
+            }
+        } catch (err) {
+            console.error("Error updating tenant status:", err.message);
+            alert(`Error: ${err.message}`);
+        }
+    };
+
     return (
-        // <Box sx={{ padding: 4 }}>
-        //     {error && (
-        //         <Typography color="error" sx={{ mb: 2 }}>
-        //             {error}
-        //         </Typography>
-        //     )}
-        //     {tenantData ? (
-        //         <Card variant="outlined" sx={{ mb: 3 }}>
-        //             <Grid container alignItems="center" spacing={2}>
-        //                 {/* Avatar Section */}
-        //                 <Grid item xs={2}>
-        //                     <Avatar
-        //                         src={tenantData.aadhaarURL}
-        //                         alt="Aadhaar Image"
-        //                         sx={{ width: 64, height: 64 }}
-        //                     />
-        //                 </Grid>
-
-        //                 {/* Tenant Details Section */}
-        //                 <Grid item xs={10}>
-        //                     <CardContent>
-        //                         <Typography variant="h6" sx={{ mb: 1 }}>
-        //                             Name: {tenantData.name}
-        //                         </Typography>
-        //                         <Grid container spacing={2}>
-        //                             <Grid item xs={3}>
-        //                                 <Typography variant="body1">
-        //                                     <strong>Organization:</strong> {tenantData.organization}
-        //                                 </Typography>
-        //                             </Grid>
-        //                             <Grid item xs={3}>
-        //                                 <Typography variant="body1">
-        //                                     <strong>Skills:</strong> {tenantData.skills}
-        //                                 </Typography>
-        //                             </Grid>
-        //                             <Grid item xs={3}>
-        //                                 <Typography variant="body1">
-        //                                     <strong>Experience:</strong> {tenantData.experience} years
-        //                                 </Typography>
-        //                             </Grid>
-        //                             <Grid item xs={3}>
-        //                                 <Typography variant="body1">
-        //                                     <strong>Start Date:</strong> {new Date(tenantData.createdAt).toLocaleDateString()}
-        //                                 </Typography>
-        //                             </Grid>
-        //                         </Grid>
-        //                     </CardContent>
-        //                 </Grid>
-        //             </Grid>
-        //         </Card>
-        //     ) : (
-        //         <Typography variant="body1">Loading tenant data...</Typography>
-        //     )}
-        // </Box>
-
         <>
             <Dash />
             <div className="show-tenant-container main-box2 ">
@@ -150,7 +107,6 @@ function Showtenant() {
                                     <div>
                                         <strong>Govt Id Number:</strong> {tenant.tenantData.aadhaarNo}
                                     </div>
-
                                     <div>
                                         <strong>Experience:</strong> {tenant.tenantData.experience} years
                                     </div>
@@ -161,12 +117,8 @@ function Showtenant() {
                                         View Govt ID
                                     </button>
 
-
-                                    <button className='accept'>Accept</button>
-                                    <button className='reject'>Reject</button>
-                                    {/* <div>
-                                    <strong>Start Date:</strong> {new Date(tenant.createdAt).toLocaleDateString()}
-                                </div> */}
+                                    <button onClick={() => handleClick('accepted', tenant._id)} className='accept'>Accept</button>
+                                    <button onClick={() => handleClick('rejected', tenant._id)} className='reject'>Reject</button>
                                 </div>
                             </div>
                         </div>
@@ -176,8 +128,6 @@ function Showtenant() {
                 )}
             </div>
         </>
-
-
     );
 }
 

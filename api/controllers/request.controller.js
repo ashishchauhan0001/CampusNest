@@ -29,3 +29,33 @@ export const getRequest =async(req,res,next)=>{
     next(errorHandler(500,"Failed to Fetch the data.Pls Try again Later."));
    }
 }
+
+export const updateStatus = async (req, res, next) => {
+   try {
+       const { status } = req.body;
+       const tenantId = req.params.id;
+
+       // Update the status in the database
+       const updatedRequest = await requestData.findByIdAndUpdate(
+           tenantId,
+           { status },
+           { new: true }
+       );
+
+       if (!updatedRequest) {
+           return res.status(404).json({
+               success: false,
+               message: "Request not found."
+           });
+       }
+
+       res.status(200).json({
+           success: true,
+           message: `Status updated to '${status}' successfully.`,
+           updatedRequest
+       });
+   } catch (error) {
+       console.error("Error in updateStatus:", error);
+       next(errorHandler(500, "Failed to update status. Please try again later."));
+   }
+};

@@ -86,6 +86,9 @@ const vendorSchema = new mongoose.Schema(
     },
     imageURL: {
       type: Array,
+    },
+    tenants:{
+      type:Array
     }
   },
   { timestamps: true }
