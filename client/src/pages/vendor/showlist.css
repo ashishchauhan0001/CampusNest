@@ -79,3 +79,28 @@
 .view-id-btn:hover {
     background-color: #0056b3;
 }
+
+.accept {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #07ac39;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    margin-left: 60vw;
+}
+.reject {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #f00c0c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    margin-left: 20px;
+}

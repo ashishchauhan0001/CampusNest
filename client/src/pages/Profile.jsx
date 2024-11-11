@@ -41,7 +41,7 @@ export default function Profile() {
     const navigate = useNavigate();
   
     const handleButtonClick = () => {
-      navigate('/show');
+      navigate('/viewlist');
     };
 
   useEffect(() => {
@@ -134,9 +134,9 @@ export default function Profile() {
     }
   };
 
-  const handleShowListings = async () => {
-    navigate(`/show`);
-  };
+  // const handleShowListings = async () => {
+  //   navigate(`/show`);
+  // };
 
   const handleListingDelete = async (listingId) => {
     try {
@@ -226,6 +226,12 @@ export default function Profile() {
           to={'/vend'}
         >
           Create Listing
+        </Link>
+        <Link
+          className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
+          to={'/rent'}
+        >
+          Rented Properties
         </Link>
       </form>
       <div className='flex justify-between mt-5'>
