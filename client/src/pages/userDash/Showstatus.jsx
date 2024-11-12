@@ -7,7 +7,7 @@ const Showstatus = () => {
   const [properties, setProperties] = useState([]);
   const userDetails = useSelector((state) => state.user.currentUser);
   const id = userDetails._id;
-  const [profile, setProfile] = useState(null);
+  
 
   // Function to handle the "Send Token" button click
   const handleClick = async (profile,vendorId) => {
@@ -17,9 +17,10 @@ const Showstatus = () => {
       const response = await axios.put(
         `http://localhost:3000/api/vendor/addprofile/${vendorId}`,
         {
-          tenants: profile,
+          profile: profile,
         }
       );
+      console.log(typeof(profile),1234)
       console.log("Token sent successfully:", response.data);
       alert("Token sent successfully!");
     } catch (error) {
@@ -37,8 +38,10 @@ const Showstatus = () => {
           `http://localhost:3000/api/request/getproperty/${id}`
         );
         const responseData = response.data.responseData;
+        console.log(response.data.responseData[0].propertyId._id,900);
         const formattedProperties = responseData.map((item) => ({
-          vendorId:item?.propertyId?._id, // make changes here
+          
+          vendorId:item.propertyId?._id, // make changes here
           name: item.propertyId?.name,
           address: item.propertyId?.address,
           rent: item.propertyId?.rent,
@@ -60,14 +63,21 @@ const Showstatus = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+
+
+      
      
     };
 
     fetchData();
   }, [id]);
+  
 
   return (
+    
     <>
+    {console.log(properties,890)}
+    
       <Side />
       <div className="flex flex-col items-center p-8 bg-gray-50 min-h-screen">
         {properties.length === 0 ? (
@@ -126,6 +136,7 @@ const Showstatus = () => {
                     ? "Rejected"
                     : "Pending"}
                 </button>
+                
 
                 {/* Send Token Button */}
                 <button
@@ -137,6 +148,7 @@ const Showstatus = () => {
     }
   `}
                   disabled={property.status !== "accepted"}
+                  
                   onClick={() => handleClick(property.profile,property.vendorId)}
                 >
                   Send Token

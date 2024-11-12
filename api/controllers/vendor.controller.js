@@ -1,4 +1,5 @@
 import VendorListing from "../models/vendor.model.js";
+
 import { errorHandler } from "../utils/error.js";
 
 // Add a new vendor listing
@@ -120,7 +121,7 @@ export const addProfile = async (req, res, next) => {
     const vendorId = req.params.id;
 
     // Insert the profile into the `tenantProfile` array in the database
-    const updatedRequest = await requestData.findByIdAndUpdate(
+    const updatedRequest = await VendorListing.findByIdAndUpdate(
       vendorId,
       {
         $push: { tenants: profile }, // Assuming `tenantProfile` is an array field in your schema

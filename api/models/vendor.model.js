@@ -94,6 +94,6 @@ const vendorSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const VendorListing = mongoose.model('VendorListing', vendorSchema);
+const VendorListing = mongoose.model("VendorListing", vendorSchema);
 
 export default VendorListing;
