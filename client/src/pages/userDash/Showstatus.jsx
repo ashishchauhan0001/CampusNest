@@ -1,20 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Side from './side';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Side from "./side";
+import { useSelector } from "react-redux";
 
 const Showstatus = () => {
   const [properties, setProperties] = useState([]);
   const userDetails = useSelector((state) => state.user.currentUser);
   const id = userDetails._id;
+  const [profile, setProfile] = useState(null);
+
+  // Function to handle the "Send Token" button click
+  const handleClick = async (profile,vendorId) => {
+    console.log("Vendor Id : ", vendorId);
+    
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/api/vendor/addprofile/${vendorId}`,
+        {
+          tenants: profile,
+        }
+      );
+      console.log("Token sent successfully:", response.data);
+      alert("Token sent successfully!");
+    } catch (error) {
+      console.error("Error sending token:", error);
+      alert("Failed to send token.");
+    }
+    console.log(profile);
+    
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/request/getproperty/${id}`);
+        const response = await axios.get(
+          `http://localhost:3000/api/request/getproperty/${id}`
+        );
         const responseData = response.data.responseData;
-        
         const formattedProperties = responseData.map((item) => ({
+          vendorId:item?.propertyId?._id, // make changes here
           name: item.propertyId?.name,
           address: item.propertyId?.address,
           rent: item.propertyId?.rent,
@@ -28,16 +52,19 @@ const Showstatus = () => {
           furnished: item.propertyId?.furnished,
           electricBackup: item.propertyId?.electricBackup,
           houseKeeping: item.propertyId?.houseKeeping,
-          imageURL: item.propertyId?.imageURL || 'https://via.placeholder.com/150',
+          imageURL:item.propertyId?.imageURL || "https://via.placeholder.com/150",
+          status: item.status,
+          profile: item.tenantData, // Added userID to the property object
         }));
-        
         setProperties(formattedProperties);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
+     
     };
+
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -59,25 +86,61 @@ const Showstatus = () => {
                 />
               </div>
               <div className="md:w-2/3 md:ml-6 space-y-2">
-                <h3 className="text-xl font-semibold text-gray-800">{property.name}</h3>
-                <p className="text-gray-600"><strong>Address:</strong> {property.address}</p>
-                <p className="text-gray-600"><strong>Rent:</strong> ₹{property.rent}</p>
-                <p className="text-gray-600"><strong>Security:</strong> ₹{property.security}</p>
-                <p className="text-gray-600"><strong>Amenities:</strong> 
-                  {property.wifi && ' WiFi,'}
-                  {property.parking && ' Parking,'}
-                  {property.laundry && ' Laundry,'}
-                  {property.mess && ' Mess,'}
-                  {property.ac && ' AC,'}
-                  {property.gym && ' Gym,'}
-                  {property.furnished && ' Furnished,'}
-                  {property.electricBackup && ' Electric Backup,'}
-                  {property.houseKeeping && ' Housekeeping,'}
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {property.name}
+                </h3>
+                <p className="text-gray-600">
+                  <strong>Address:</strong> {property.address}
+                </p>
+                <p className="text-gray-600">
+                  <strong>Rent:</strong> ₹{property.rent}
+                </p>
+                <p className="text-gray-600">
+                  <strong>Security:</strong> ₹{property.security}
+                </p>
+                <p className="text-gray-600">
+                  <strong>Amenities:</strong>
+                  {property.wifi && " WiFi,"}
+                  {property.parking && " Parking,"}
+                  {property.laundry && " Laundry,"}
+                  {property.mess && " Mess,"}
+                  {property.ac && " AC,"}
+                  {property.gym && " Gym,"}
+                  {property.furnished && " Furnished,"}
+                  {property.electricBackup && " Electric Backup,"}
+                  {property.houseKeeping && " Housekeeping,"}
                 </p>
               </div>
               <div className="md:w-1/6 flex flex-col space-y-2">
-                <button className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 text-sm font-bold"> View Status</button>
-                <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Send Token</button>
+                {/* Status Button */}
+                <button
+                  className={`px-4 py-2 rounded-lg text-sm font-bold ${
+                    property.status === "accepted"
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
+                  }`}
+                >
+                  {property.status === "accepted"
+                    ? "Accepted"
+                    : property.status === "rejected"
+                    ? "Rejected"
+                    : "Pending"}
+                </button>
+
+                {/* Send Token Button */}
+                <button
+                  className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors duration-200 
+    ${
+      property.status === "accepted"
+        ? "bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
+        : "bg-gray-300 text-gray-600 cursor-not-allowed"
+    }
+  `}
+                  disabled={property.status !== "accepted"}
+                  onClick={() => handleClick(property.profile,property.vendorId)}
+                >
+                  Send Token
+                </button>
               </div>
             </div>
           ))
