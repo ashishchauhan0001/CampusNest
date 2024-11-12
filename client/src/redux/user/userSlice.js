@@ -4,6 +4,7 @@ const initialState = {
   currentUser: null,
   error: null,
   loading: false,
+  profile: false,
 };
 
 const userSlice = createSlice({
@@ -58,6 +59,9 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    build: (state, action) => {
+      state.profile = action.payload;
+    }
   },
 });
 
@@ -74,6 +78,7 @@ export const {
   signOutUserFailure,
   signOutUserSuccess,
   signOutUserStart,
+  build,
 } = userSlice.actions;
 
 export default userSlice.reducer;
