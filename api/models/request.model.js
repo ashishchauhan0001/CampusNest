@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-
+import VendorListing from './vendor.model.js';
 
 const request = new mongoose.Schema(
     {
@@ -15,6 +15,11 @@ const request = new mongoose.Schema(
             type: String,
             default: 'pending'
 
+        },
+        propertyId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'VendorListing',
+            required:true,
         }
 
     },

@@ -37,7 +37,8 @@ export default function App() {
         <Route path='/viewlist' element={<Showlist />} />
         <Route path='/view-tenants' element={<Showtenant />} />
         <Route path="/landlord-contact" element={<LandlordContact />} />
-
+        <Route path="/rent" /> 
+          {/*  */}
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/create-listing' element={<CreateListing />} />
