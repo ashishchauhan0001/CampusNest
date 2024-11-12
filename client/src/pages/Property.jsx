@@ -46,6 +46,7 @@ const Property = () => {
                 const data = {
                     "vendorId": property[0].vendorId,
                     "tenantData": tenantData.tenant,
+                    "propertyId":property[0]._id,
                 }
                 console.log("My data : ", data);
 
