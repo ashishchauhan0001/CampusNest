@@ -113,3 +113,35 @@ export const getVendors = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch vendors." });
   }
 };
+
+export const addProfile = async (req, res, next) => {
+  try {
+    const { profile } = req.body;
+    const vendorId = req.params.id;
+
+    // Insert the profile into the `tenantProfile` array in the database
+    const updatedRequest = await requestData.findByIdAndUpdate(
+      vendorId,
+      {
+        $push: { tenants: profile }, // Assuming `tenantProfile` is an array field in your schema
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedRequest) {
+      return res.status(404).json({
+        success: false,
+        message: "Request not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `Profile added successfully.`,
+      updatedRequest,
+    });
+  } catch (error) {
+    console.error("Error in addProfile:", error);
+    next(errorHandler(500, "Failed to add profile. Please try again later."));
+  }
+};
