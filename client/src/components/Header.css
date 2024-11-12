@@ -71,12 +71,14 @@ header {
 
 .link:hover {
     text-decoration: underline;
+    
 
 }
 
 .profile {
-    border-radius: 50%;
-    height: 1.75rem;
-    width: 1.75rem;
-    object-fit: cover;
+    border-radius: 50%;              
+    height: 2rem;                  
+    width: 2rem;                   
+    object-fit: cover;              
+    border: 2px solid white;         
 }

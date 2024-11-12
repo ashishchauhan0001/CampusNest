@@ -52,23 +52,24 @@ export const updateVendor = async (req, res, next) => {
 // Get a single vendor listing
 export const getVendor = async (req, res, next) => {
   try {
-
     const vendor = await VendorListing.find({
       $or: [
         { _id: req.params.id },
-        { vendorId: req.params.id }
+        { vendorId: req.params.id },
+        { tenants: { $elemMatch: { _id: req.params.id } } }
       ]
     });
 
-
-    if (!vendor) {
+    if (!vendor || vendor.length === 0) {
       return next(errorHandler(404, "Vendor listing not found!"));
     }
+
     res.status(200).json(vendor);
   } catch (error) {
     next(errorHandler(500, "Failed to fetch vendor."));
   }
 };
+
 
 // Get all vendor listings
 export const getVendors = async (req, res) => {
@@ -144,5 +145,18 @@ export const addProfile = async (req, res, next) => {
   } catch (error) {
     console.error("Error in addProfile:", error);
     next(errorHandler(500, "Failed to add profile. Please try again later."));
+  }
+};
+
+
+export const getNest = async (req, res, next) => {
+  try {
+    const vendor = await VendorListing.find({
+      tenants: { $elemMatch: { userID: req.params.id } }
+    });
+
+    res.status(200).json(vendor);
+  } catch (error) {
+    next(errorHandler(500, "Failed to fetch vendor."));
   }
 };

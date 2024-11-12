@@ -39,7 +39,7 @@ export default function Card({ listing }) {
 
           {/* Rent and Market Distance */}
           <p className='text-slate-500 mt-2 font-semibold'>
-            Rent: ${listing.rent?.toLocaleString('en-US')} / month
+            Rent: ₹{listing.rent?.toLocaleString('en-US')} / month
           </p>
           <p className='text-slate-500'>
             Market Distance: {listing.marketDistance} meters
