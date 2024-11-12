@@ -5,6 +5,7 @@ import axios from 'axios';
 import { storage } from '../firebase.js';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './profile.css';
+import { useDispatch } from 'react-redux';
 
 const BuildProfile = () => {
     const userDetails = useSelector((state) => state.user.currentUser);
@@ -80,6 +81,8 @@ const BuildProfile = () => {
             const response = await axios.post('http://localhost:3000/api/tenant/addtenant', profileData);
             if (response.data.success) {
                 alert('Profile created successfully');
+                dispatch(build(true));
+
             } else {
                 alert('Failed to create profile: ' + response.data.message);
             }
