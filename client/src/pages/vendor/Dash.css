@@ -1,13 +1,12 @@
 .dash {
-    margin-top: 1vh;
-    width: 250px;
+    
+    width: 265px;
     height: 100%;
     padding: 20px;
-    position: fixed;
-    background-color: white;
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    position:absolute;
+    background-color: rgb(249, 236, 241);
+    box-shadow: 0 4px 10px rgba(6, 35, 179, 0.2);
+    border: 1px solid rgba(180, 167, 220, 0.2);
 }
 
 .dash h2 {
@@ -26,12 +25,13 @@
 }
 
 .dash ul li :hover {
-    background-color: #ff9f00;
+    background-color: #3cff00;
 }
 
 .dash ul li a {
     display: block;
-    color: black;
+    background: linear-gradient(90deg, #4a90e2, #a63db4, #f66d6d);
+    color: white;
     text-decoration: none;
     font-size: 1.1em;
     padding: 12px 15px;
@@ -46,6 +46,7 @@
 
 
 .dash ul li a:hover {
-    background: linear-gradient(90deg, #4a90e2, #a63db4, #f66d6d);
-    color: white;
+    transform: scale(1.1); /* Slightly enlarges the text */
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3); /* Adds a soft white shadow around the text */
+    letter-spacing: 0.5px; /* Slightly increases the letter spacing */
 }

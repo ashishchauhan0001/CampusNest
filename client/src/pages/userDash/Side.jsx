@@ -11,7 +11,7 @@ const Side = () => {
                     <Link to="/rent">View Request Status</Link>
                 </li>
                 <li>
-                    <Link to="/xxx">Your Campus Nest</Link>
+                    <Link to="/nest">Your Campus Nest</Link>
                 </li>
 
             </ul>

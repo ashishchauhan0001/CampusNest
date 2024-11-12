@@ -18,7 +18,8 @@ import Property from './pages/Property';
 import Showlist from './pages/vendor/Showlist';
 import Showtenant from './pages/vendor/Showtenant'
 import LandlordContact from './components/LandlordContact';
-import Showstatus from './pages/userDash/showstatus';
+import Showstatus from './pages/userDash/Showstatus';
+import Shownest from './pages/userDash/Shownest'
 
 export default function App() {
   return (
@@ -39,7 +40,7 @@ export default function App() {
         <Route path='/view-tenants' element={<Showtenant />} />
         <Route path='/rent' element={<Showstatus />} />
         <Route path="/landlord-contact" element={<LandlordContact />} />
-        <Route path="/rent" /> 
+        <Route path="/nest" element={<Shownest/>}/> 
           {/*  */}
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
