@@ -5,6 +5,7 @@ const initialState = {
   error: null,
   loading: false,
   profile: false,
+  organisation: null,
 };
 
 const userSlice = createSlice({
@@ -61,6 +62,9 @@ const userSlice = createSlice({
     },
     build: (state, action) => {
       state.profile = action.payload;
+    },
+    org: (state, action) => {
+      state.organisation = action.payload;
     }
   },
 });
@@ -79,6 +83,8 @@ export const {
   signOutUserSuccess,
   signOutUserStart,
   build,
+  org,
+
 } = userSlice.actions;
 
 export default userSlice.reducer;

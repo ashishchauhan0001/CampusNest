@@ -15,92 +15,101 @@
 
 }
 
-.show-tenant-container {
-    padding: 20px;
-}
-
-.error-message {
-    color: red;
-    margin-bottom: 1em;
-}
 
 .tenant-card {
     display: flex;
-    align-items: center;
-    padding: 16px;
-    border: 1px solid #ddd;
+    width: 65vw;
+    height: 40vh;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    margin-bottom: 16px;
-    background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 20px auto;
+    background-color: #fff;
 }
 
-.avatar-section {
-    margin-right: 16px;
+.profile1 {
+    width: 30%;
+    height: 100%; /* Ensure the profile section takes up full height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    padding: 10px; /* Adding padding to ensure the image doesn't touch edges */
 }
 
-.tenant-avatar {
-    width: 64px;
-    height: 64px;
+.profile1 img {
+    width: auto; /* Adjust the width to fit better inside the profile container */
+    height: 60%;
+    border-radius: 8px;
+    object-fit: cover;
+
 }
 
 .tenant-details {
-    flex: 1;
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .tenant-name {
-    font-size: 1.2em;
-    margin-bottom: 0.5em;
+    font-size: 1.5rem; /* Slightly larger font for better visibility */
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.tenant-info div {
-    margin-bottom: 0.3em;
-    font-size: 1em;
-}
-
-.no-requests {
-    text-align: center;
-    font-size: 1.2em;
-    color: #888;
+.tenant-info {
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-size: 1rem; /* Ensure readability */
 }
 
 .view-id-btn {
     margin-top: 10px;
-    padding: 6px 12px;
+    padding: 8px 12px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    text-align: center;
-    font-size: 14px;
 }
 
 .view-id-btn:hover {
     background-color: #0056b3;
 }
 
-.accept {
-    margin-top: 10px;
-    padding: 6px 12px;
-    background-color: #07ac39;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-    margin-left: 60vw;
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px; /* Ensure there's space between the action buttons and other content */
 }
-.reject {
-    margin-top: 10px;
-    padding: 6px 12px;
-    background-color: #f00c0c;
-    color: white;
-    border: none;
+
+.action-button {
+    padding: 8px 16px;
     border-radius: 4px;
+    font-weight: 600;
     cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-    margin-left: 20px;
+    border: none;
+    width: 25%; /* Full width for the action buttons */
+}
+
+.action-button.accept {
+    background-color: #28a745;
+    color: white;
+}
+
+.action-button.accept:hover {
+    background-color: #218838;
+}
+
+.action-button.reject {
+    background-color: #dc3545; /* Changed to red for reject */
+    color: white;
+}
+
+.action-button.reject:hover {
+    background-color: #c82333;
 }
