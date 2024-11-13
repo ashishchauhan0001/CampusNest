@@ -6,15 +6,17 @@ import { storage } from '../firebase.js';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './profile.css';
 import { useDispatch } from 'react-redux';
+import { build, org } from '../redux/user/userSlice.js';
 
 const BuildProfile = () => {
+    const dispatch = useDispatch();
     const userDetails = useSelector((state) => state.user.currentUser);
-    
+
     const id = userDetails._id;
     const [tenantDetails, setTenantDetails] = useState({
-        
+
         name: '',
-        userImg:userDetails.avatar,
+        userImg: userDetails.avatar,
         userID: id,
         address: '',
         designation: '',
@@ -58,7 +60,7 @@ const BuildProfile = () => {
 
     const uploadAadhaarImage = async () => {
         if (!aadhaarURL) return null;
-        
+
         const storageRef = ref(storage, `aadhaar/${Date.now()}_${aadhaarURL.name}`);
         await uploadBytes(storageRef, aadhaarURL);
         const url = await getDownloadURL(storageRef);
@@ -66,13 +68,14 @@ const BuildProfile = () => {
     };
     console.log("Tenant Data : ", tenantDetails);
     console.log("URL : ", aadhaarURL);
-    
-    
+
+
     const handleProfileSubmit = async () => {
         try {
             const aadhaarImageURL = await uploadAadhaarImage();
             console.log("URL : ", aadhaarImageURL);
-            
+
+
             const profileData = {
                 ...tenantDetails,
                 aadhaarURL: aadhaarImageURL, // Add uploaded Aadhaar image URL
@@ -82,6 +85,10 @@ const BuildProfile = () => {
             if (response.data.success) {
                 alert('Profile created successfully');
                 dispatch(build(true));
+                console.log(tenantDetails.organization,899);
+                dispatch(org(tenantDetails.organization));
+
+
 
             } else {
                 alert('Failed to create profile: ' + response.data.message);

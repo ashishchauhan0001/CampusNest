@@ -10,6 +10,7 @@ function Showtenant() {
     const [tenantData, setTenantData] = useState(null);
     const [error, setError] = useState('');
 
+
     // Get the current user ID from Redux store
     const userDetails = useSelector((state) => state.user.currentUser);
     const userId = userDetails?._id;
@@ -44,12 +45,13 @@ function Showtenant() {
 
     // Handle click for Accept or Reject
     const handleClick = async (status, id) => {
-        console.log("Status : ", status ," ID : ",id);
-        
+        console.log("Status : ", status, " ID : ", id);
+        setClick(true)
+
         try {
             // API call to update the tenant status
             const response = await axios.put(`http://localhost:3000/api/request/updateStatus/${id}`, {
-                status: status, // 'accepted' or 'rejected'
+                status: status,
             });
 
             if (response.status === 200) {
@@ -82,14 +84,17 @@ function Showtenant() {
                 {tenantData && tenantData.length > 0 ? (
                     tenantData.map((tenant) => (
                         <div key={tenant._id} className="tenant-card">
-                            <div className="avatar-section">
-                                <Avatar
+                            <div className=" profile1">
+                                <img
                                     onClick={() => window.open(tenant.tenantData.userImg, '_blank')}
                                     src={tenant.tenantData.userImg}
                                     alt="Profile Image"
-                                    className="tenant-avatar"
+                                    
                                 />
                             </div>
+
+
+
                             <div className="tenant-details">
                                 <Typography variant="h6" className="tenant-name">
                                     Name: {tenant.tenantData.name}
@@ -117,8 +122,15 @@ function Showtenant() {
                                         View Govt ID
                                     </button>
 
-                                    <button onClick={() => handleClick('accepted', tenant._id)} className='accept'>Accept</button>
-                                    <button onClick={() => handleClick('rejected', tenant._id)} className='reject'>Reject</button>
+                                    <div className="action-buttons">
+                                        <button onClick={() => handleClick('accepted', tenant._id)} className="action-button accept">
+                                            Accepted
+                                        </button>
+                                        <button onClick={() => handleClick('rejected', tenant._id)} className="action-button reject">
+                                            Rejected
+                                        </button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
