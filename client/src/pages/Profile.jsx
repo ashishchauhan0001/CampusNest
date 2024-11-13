@@ -121,6 +121,7 @@ export default function Profile() {
 
   const handleSignOut = async () => {
     try {
+      localStorage.removeItem('organization');
       dispatch(signOutUserStart());
       const res = await fetch('/api/auth/signout');
       const data = await res.json();

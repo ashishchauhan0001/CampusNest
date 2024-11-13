@@ -23,6 +23,8 @@ const BuildProfile = () => {
         skills: [],
         experience: 0,
     });
+
+
     const [aadhaarURL, setAadhaarURL] = useState(null);
     const [skillInput, setSkillInput] = useState('');
 
@@ -30,6 +32,7 @@ const BuildProfile = () => {
         const { name, value } = e.target;
         setTenantDetails({ ...tenantDetails, [name]: value });
     };
+
 
     const handleSkillInputChange = (e) => {
         setSkillInput(e.target.value);
@@ -77,7 +80,7 @@ const BuildProfile = () => {
                 ...tenantDetails,
                 aadhaarURL: aadhaarImageURL, // Add uploaded Aadhaar image URL
             };
-
+             
             const response = await axios.post('http://localhost:3000/api/tenant/addtenant', profileData);
             if (response.data.success) {
                 alert('Profile created successfully');

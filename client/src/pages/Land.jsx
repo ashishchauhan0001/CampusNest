@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
 import Map from '../components/Map';
 import About from '../components/About';
 import SearchBar from '../components/SearchBar';
@@ -16,6 +15,11 @@ const Land = () => {
         'Kolkata',
         'Ahmedabad'
     ];
+
+    useEffect(() => {
+        localStorage.setItem('organization', 'jiit');
+    }, [])
+    
 
     return (
         <>

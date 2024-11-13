@@ -1,9 +1,5 @@
-
-
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import './search.css'; 
 import Card from '../components/Card.jsx'
 

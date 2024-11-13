@@ -3,8 +3,39 @@ import { MdLocationOn,MdFoodBank,MdWindPower  } from 'react-icons/md';
 import { FaWifi, FaParking, FaCouch, FaBolt, FaSwimmingPool } from 'react-icons/fa';
 import { GiVacuumCleaner, GiWashingMachine } from 'react-icons/gi';
 import { BiDumbbell } from 'react-icons/bi';
+import axios from 'axios';
+import { useEffect,useState } from 'react';
 
 export default function Card({ listing }) {
+
+  const [organizationCount, setOrganizationCount] = useState(0);
+
+  useEffect(() => {
+
+    const organization = localStorage.getItem('organization');
+    
+    if (organization) {
+        const fetchOrganizationCount = async () => {
+          try {
+            const response = await axios.get(`http://localhost:3000/api/vendor/getcount/${organization}`, {
+                params: {
+                    id: listing._id,
+                },
+            });
+            console.log('Count of vendors:', response.data.count);
+                if (response.data.success) {
+                    setOrganizationCount(response.data.count);
+                } else {
+                    console.error('Failed to fetch count:', response.data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching organization count:', error);
+            }
+        };
+        fetchOrganizationCount();
+    }
+}, []);
+
   return (
     <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
       {/* <Link to={`/listing/${listing._id}`}> */}
@@ -44,6 +75,7 @@ export default function Card({ listing }) {
           <p className='text-slate-500'>
             Market Distance: {listing.marketDistance} meters
           </p>
+          <p className='text-green-600'> <span className='text-green-600 text-xl'> {organizationCount} </span> people from your organization stay here</p>
 
           {/* Room Details */}
           <div className='text-slate-700 flex gap-4'>
