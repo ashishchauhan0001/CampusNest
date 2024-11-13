@@ -91,11 +91,7 @@ const BuildProfile = () => {
                 console.log(tenantDetails.organization,899);
                 dispatch(org(tenantDetails.organization));
 
-
-
-            } else {
-                alert('Failed to create profile: ' + response.data.message);
-            }
+            } 
         } catch (error) {
             console.error('Error creating profile:', error);
             alert('Failed to create profile: Network or server error');
