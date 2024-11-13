@@ -1,40 +1,44 @@
 import { Link } from 'react-router-dom';
-import { MdLocationOn,MdFoodBank,MdWindPower  } from 'react-icons/md';
+import { MdLocationOn, MdFoodBank, MdWindPower } from 'react-icons/md';
 import { FaWifi, FaParking, FaCouch, FaBolt, FaSwimmingPool } from 'react-icons/fa';
 import { GiVacuumCleaner, GiWashingMachine } from 'react-icons/gi';
 import { BiDumbbell } from 'react-icons/bi';
 import axios from 'axios';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Card({ listing }) {
 
   const [organizationCount, setOrganizationCount] = useState(0);
+  const org = useSelector((state) => state.user.organisation);
+  console.log(org,67);
 
   useEffect(() => {
 
-    const organization = localStorage.getItem('organization');
-    
-    if (organization) {
-        const fetchOrganizationCount = async () => {
-          try {
-            const response = await axios.get(`http://localhost:3000/api/vendor/getcount/${organization}`, {
-                params: {
-                    id: listing._id,
-                },
-            });
-            console.log('Count of vendors:', response.data.count);
-                if (response.data.success) {
-                    setOrganizationCount(response.data.count);
-                } else {
-                    console.error('Failed to fetch count:', response.data.message);
-                }
-            } catch (error) {
-                console.error('Error fetching organization count:', error);
-            }
-        };
-        fetchOrganizationCount();
+
+
+    if (org) {
+      const fetchOrganizationCount = async () => {
+        try {
+
+          const response = await axios.get(`http://localhost:3000/api/vendor/getcount/${org}`, {
+            params: {
+              id: listing._id,
+            },
+          });
+          console.log('Count of vendors:', response.data.count);
+          if (response.data.success) {
+            setOrganizationCount(response.data.count);
+          } else {
+            console.error('Failed to fetch count:', response.data.message);
+          }
+        } catch (error) {
+          console.error('Error fetching organization count:', error);
+        }
+      };
+      fetchOrganizationCount();
     }
-}, []);
+  }, []);
 
   return (
     <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
@@ -108,9 +112,9 @@ export default function Card({ listing }) {
                 <FaBolt className='text-red-500' /> E.Backup
               </div>
             )}
-             {listing.ac && (
+            {listing.ac && (
               <div className='flex items-center gap-1'>
-                <MdWindPower  className='text-red-500' /> AC
+                <MdWindPower className='text-red-500' /> AC
               </div>
             )}
             {listing.gym && (
@@ -133,9 +137,9 @@ export default function Card({ listing }) {
                 <FaCouch className='text-brown-700' /> Furnished
               </div>
             )}
-             {listing.mess && (
+            {listing.mess && (
               <div className='flex items-center gap-1'>
-                <MdFoodBank  className='text-green-700' /> Mess
+                <MdFoodBank className='text-green-700' /> Mess
               </div>
             )}
           </div>
