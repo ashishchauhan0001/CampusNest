@@ -160,3 +160,28 @@ export const getNest = async (req, res, next) => {
     next(errorHandler(500, "Failed to fetch vendor."));
   }
 };
+
+
+export const getCount = async (req, res, next) => {
+  const organization = req.params.organization;
+  const { id } = req.query;
+
+  try {
+    const vendorListing = await VendorListing.findOne({ _id: id });
+
+    if (!vendorListing) {
+      return res.status(404).json({ success: false, message: "Vendor listing not found" });
+    }
+    
+    const count = vendorListing.tenants.filter(
+      (tenant) => tenant.organization === organization
+    ).length;
+
+    res.json({ success: true, count });
+  } catch (error) {
+    console.error("Error fetching organization count:", error);
+    next(errorHandler(500, "Failed to fetch count --> Server error"));
+  }
+};
+
+
