@@ -120,6 +120,8 @@ export const addProfile = async (req, res, next) => {
   try {
     const { profile } = req.body;
     const vendorId = req.params.id;
+    console.log(profile);
+    
 
     // Insert the profile into the `tenantProfile` array in the database
     const updatedRequest = await VendorListing.findByIdAndUpdate(

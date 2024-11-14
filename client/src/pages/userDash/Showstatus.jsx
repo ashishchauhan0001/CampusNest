@@ -7,7 +7,7 @@ const Showstatus = () => {
   const [properties, setProperties] = useState([]);
   const userDetails = useSelector((state) => state.user.currentUser);
   const id = userDetails._id;
-  const [profile, setProfile] = useState(null);
+  // const [profile, setProfile] = useState(null);
 
   // Function to handle the "Send Token" button click
   const handleClick = async (profile,vendorId) => {
@@ -17,7 +17,7 @@ const Showstatus = () => {
       const response = await axios.put(
         `http://localhost:3000/api/vendor/addprofile/${vendorId}`,
         {
-          tenants: profile,
+          profile: profile,
         }
       );
       console.log("Token sent successfully:", response.data);
@@ -26,7 +26,7 @@ const Showstatus = () => {
       console.error("Error sending token:", error);
       alert("Failed to send token.");
     }
-    console.log(profile);
+    console.log(profile,33);
     
   };
 

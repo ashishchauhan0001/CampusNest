@@ -26,7 +26,7 @@ export default function Header() {
   }, [location.search]);
 
   return (
-    <header className="bg-[#f4f4f4] shadow-md shadow-red-200">
+    <header className="bg-[#f4f4f4] shadow-md shadow-red-200 mb-20">
       <div className="container mx-auto flex items-center justify-between p-4">
       <Link to="/" className="flex items-center hover:no-underline hover:scale-105 transition-transform duration-200 ease-in-out">
   <h1 className="text-white font-sans font-bold text-2xl">
