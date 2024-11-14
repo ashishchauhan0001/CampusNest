@@ -14,7 +14,6 @@ const BuildProfile = () => {
 
     const id = userDetails._id;
     const [tenantDetails, setTenantDetails] = useState({
-
         name: '',
         userImg: userDetails.avatar,
         userID: id,

@@ -1,87 +1,8 @@
-// import { FaSearch } from 'react-icons/fa';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import { useEffect, useState } from 'react';
-
-// export default function Header() {
-//   const { currentUser } = useSelector((state) => state.user);
-//   const [searchTerm, setSearchTerm] = useState('');
-//   const navigate = useNavigate();
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const urlParams = new URLSearchParams(window.location.search);
-//     urlParams.set('searchTerm', searchTerm);
-//     const searchQuery = urlParams.toString();
-//     navigate(`/search?${searchQuery}`);
-//   };
-
-//   useEffect(() => {
-//     const urlParams = new URLSearchParams(location.search);
-//     const searchTermFromUrl = urlParams.get('searchTerm');
-
-//      console.log(currentUser,currentUser.avatar);
-
-//     if (searchTermFromUrl) {
-//       setSearchTerm(searchTermFromUrl);
-//     }
-//   }, [location.search]);
-//   return (
-//     <header className='bg-slate-200 shadow-md'>
-//       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
-//         <Link to='/'>
-//           <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-//             <span className='text-slate-500 text-xl'>Campus</span>
-//             <span className='text-red-600 text-2xl'>Nest</span>
-//           </h1>
-//         </Link>
-//         <form
-//           onSubmit={handleSubmit}
-//           className='bg-slate-100 p-3 rounded-lg flex items-center'
-//         >
-//           <input
-//             type='text'
-//             placeholder='Search...'
-//             className='bg-transparent focus:outline-none w-24 md:w-72'
-//             value={searchTerm}
-//             onChange={(e) => setSearchTerm(e.target.value)}
-//           />
-//           <button>
-//             <FaSearch className='text-slate-600' />
-//           </button>
-//         </form>
-//         <ul className='flex gap-4'>
-//           <Link to='/'>
-//             <li className='hidden sm:inline text-slate-700 hover:underline text-xl'>
-//               Home
-//             </li>
-//           </Link>
-//           <Link to='/about'>
-//             <li className='hidden sm:inline text-slate-700 hover:underline text-xl'>
-//               About
-//             </li>
-//           </Link>
-//           <Link to='/profile'>
-//             {currentUser ? (
-//               <img
-//                 className='rounded-full h-7 w-7 object-cover'
-//                 src={currentUser.avatar}
-//                 alt='profile'
-//               />
-//             ) : (
-//               <li className=' text-slate-700 hover:underline'> Sign in</li>
-//             )}
-//           </Link>
-//         </ul>
-//       </div>
-//     </header>
-//   );
-// }
-
 import { FaSearch } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import './Header.css';
+
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -99,54 +20,65 @@ export default function Header() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
-
-    console.log(currentUser, currentUser?.avatar);
-
     if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
     }
   }, [location.search]);
 
   return (
-    <header>
-      <div className='container'>
-        <Link to='/'>
-          <h1 className='logo'>
-            <span>Campus</span>
-            <span>Nest</span>
-          </h1>
-        </Link>
-        <form onSubmit={handleSubmit} className='form'>
+    <header className="bg-[#f4f4f4] shadow-md shadow-red-200">
+      <div className="container mx-auto flex items-center justify-between p-4">
+      <Link to="/" className="flex items-center hover:no-underline hover:scale-105 transition-transform duration-200 ease-in-out">
+  <h1 className="text-white font-sans font-bold text-2xl">
+    <span className="text-red-500">Campus</span>
+    <span className="text-black">Nest</span>
+  </h1>
+</Link>
+
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex items-center bg-white rounded-lg shadow-md px-3 py-2"
+        >
           <input
-            type='text'
-            placeholder='Search...'
-            className='input'
+            type="text"
+            placeholder="Search..."
+            className="w-32 md:w-64 outline-none px-2 text-gray-700"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button>
-            <FaSearch className='icon' />
+          <button type="submit" className="text-gray-600 hover:text-gray-800">
+            <FaSearch className="w-5 h-5" />
           </button>
         </form>
-        <ul className='links'>
-          <Link to='/'>
-            <li className='link'>Home</li>
+
+        <div className="flex items-center gap-6">
+          <Link to="/" className="text-white font-medium">
+            <button className="bg-red-500 hover:bg-red-600 hover:scale-105 hover:border-e-zinc-300 text-white px-4 py-2 rounded-lg shadow">
+              Home
+            </button>
           </Link>
-          <Link to='/about'>
-            <li className='link'>About</li>
+
+          <Link to="/about" className="text-white font-medium">
+            <button onClick={() => navigate('/about')} className="bg-blue-500 hover:bg-blue-600 hover:scale-105 text-white px-4 py-2 rounded-lg shadow">
+              About
+            </button>
           </Link>
-          <Link to='/profile'>
+
+          <Link to="/profile">
             {currentUser ? (
               <img
-                className='profile'
+                className="w-10 h-10 rounded-full border-2 border-black object-cover"
                 src={currentUser.avatar}
-                alt='profile'
+                alt="profile"
               />
             ) : (
-              <li className='link'>Sign in</li>
+              <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow">
+                Sign in
+              </button>
             )}
           </Link>
-        </ul>
+        </div>
       </div>
     </header>
   );
