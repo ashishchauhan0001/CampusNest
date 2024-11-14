@@ -111,7 +111,7 @@ const Showstatus = () => {
                   {property.houseKeeping && " Housekeeping,"}
                 </p>
               </div>
-              <div className="md:w-1/6 flex flex-col space-y-2">
+              <div className="md:w-2/6 flex flex-col space-y-2">
                 {/* Status Button */}
                 <button
                   className={`px-4 py-2 rounded-lg text-sm font-bold ${

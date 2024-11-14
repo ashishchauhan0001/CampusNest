@@ -3,42 +3,84 @@ import React from 'react';
 function Footer() {
   return (
     <>
-      {/* <hr className='dark:bg-slate-600' /> */}
-      <hr className='bg-red-600' />
-      <footer className="footer footer-center p-10 text-black bg-gray-100 rounded">
+      <footer className="mt-64 footer footer-center p-10 text-white bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 ">
+        
+        {/* Brand Name */}
+        <div className="font-bold text-lg md:text-3xl text-center mb-6 tracking-wide">
+          <span className="text-red-500">Campus</span>
+          <span className="text-white">Nest</span>
+        </div>
 
-      <div className='font-bold text-sm md:text-xl text-center p-4'>
-            <span className='text-slate-500 text-xl'>Campus</span>
-            <span className='text-red-600 text-2xl'>Nest</span>
-       </div>
-
-        <nav className="grid grid-flow-col justify-center gap-5 mb-3">
-          <a className="link link-hover  no-underline hover:no-underline hover:text-blue-600 transition-colors" href="#">Home</a>
-          <a className="link link-hover  no-underline hover:no-underline hover:text-blue-600 transition-colors" href="#">AboutUs</a>
-          <a className="link link-hover  no-underline hover:no-underline hover:text-blue-600 transition-colors" href="#">Properties</a>
-          <a className="link link-hover  no-underline hover:no-underline hover:text-blue-600 transition-colors" href="#">More</a>
+        {/* Navigation Links */}
+        <nav className="flex flex-wrap justify-center gap-6 mb-5 text-lg">
+          {['Home', 'About Us', 'Properties', 'Blog', 'Contact Us', 'FAQ'].map((link, index) => (
+            <a
+              key={index}
+              className="link link-hover no-underline text-white hover:text-blue-400 transition-colors duration-300"
+              href={`#${link.replace(' ', '').toLowerCase()}`}
+            >
+              {link}
+            </a>
+          ))}
         </nav>
-        <nav>
-          <div className="grid grid-flow-col gap-4 justify-center">
-          <a href="#" aria-label="Twitter" className="hover:text-sky-400 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-              </svg>
+
+        {/* Social Media Links with Icons */}
+        <nav className="flex justify-center gap-6 mb-6 text-xl">
+          {[
+            { name: 'Twitter', color: 'text-sky-400', icon: 'fab fa-twitter' },
+            { name: 'YouTube', color: 'text-red-600', icon: 'fab fa-youtube' },
+            { name: 'Facebook', color: 'text-blue-600', icon: 'fab fa-facebook' },
+            { name: 'Instagram', color: 'text-pink-500', icon: 'fab fa-instagram' },
+            { name: 'LinkedIn', color: 'text-blue-700', icon: 'fab fa-linkedin' },
+          ].map((social, index) => (
+            <a
+              key={index}
+              href="#"
+              aria-label={social.name}
+              className={`hover:${social.color} transition-colors duration-300`}
+            >
+              <i className={social.icon}></i>
             </a>
-            <a href="#" aria-label="YouTube" className="hover:text-red-600 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
-                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-              </svg>
-            </a>
-            <a href="#" aria-label="Facebook" className="hover:text-blue-600 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
-              </svg>
-            </a>
+          ))}
+        </nav>
+
+        {/* Contact Information */}
+        <div className="text-center mb-5 space-y-1">
+          <p className="text-gray-400 hover:text-white transition-colors duration-300">📞 +91 8171065385</p>
+          <p className="text-gray-400 hover:text-white transition-colors duration-300">✉️ asch20080@gmail.com</p>
+        </div>
+
+        {/* Quick Links Section */}
+        <div className="flex flex-col md:flex-row justify-center gap-72 mb-6 text-left">
+          <div className="space-y-2">
+            <h4 className="font-semibold text-white mb-3 mx-9">Company</h4>
+            {['About   ', 'Careers  ', 'Press'].map((item, index) => (
+              <a
+                key={index}
+                className="link link-hover text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                href="#"
+              >
+                {item}
+              </a>
+            ))}
           </div>
-        </nav>
-        <aside className='mt-6 text-center'>
-          <p >Copyright © 2024 - All right reserved by @CampusNest</p>
+          <div className="space-y-2">
+            <h4 className="font-semibold text-white mb-3 mx-28">Support</h4>
+            {['Help Center', 'Privacy Policy', 'Terms of Service'].map((item, index) => (
+              <a
+                key={index}
+                className="link link-hover text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                href="#"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <aside className="text-center text-gray-400 hover:text-white transition-colors duration-300">
+          <p>© 2024 CampusNest. All rights reserved.</p>
         </aside>
       </footer>
     </>

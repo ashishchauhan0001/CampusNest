@@ -13,10 +13,7 @@ code {
     font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
   }
 body {
-    background-color: #f4f4f4;
-    font-family: 'Comic Sans', Georgia, serif;
-    
-
+    font-family:sans-serif;
 }
 
 
@@ -29,9 +26,8 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-
     width: 100%;
-
+    /* background-color: whitesmoke; */
 }
 
 
@@ -41,98 +37,44 @@ body {
     align-items: center;
     padding: 20px;
     height: 40vh;
-
+    margin-top: 150px;
     width: 97vw;
-
     background-color: #f4f4f4;
-
 }
 
 
 .leftText {
     flex: 1;
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding: 20px;
+    font-family:sans-serif;
+    margin-top: 200px;
 }
 
 
-.rightText {
+.rightText iframe {
     flex: 1;
-    text-align: right;
-    padding: 20px;
-    font-size: 2.2rem;
+    margin-top: 100px;
+    height: 700px;
+    width: 600px;
+    /* text-align: right; */
+    /* padding: 20px; */
+    /* font-size: 2rem; */
 }
-
-.animatedText {
-
-    animation: fadeInOut 9s infinite;
-}
-
-.text1 {
-    animation-delay: 0s;
-}
-
-.text2 {
-    animation-delay: 3s;
-}
-
-.text3 {
-    animation-delay: 6s;
-}
-
-
-@keyframes fadeInOut {
-
-    0%,
-    33% {
-        opacity: 1;
-    }
-
-    66%,
-    100% {
-        opacity: 0;
-    }
-}
-
-
-.bottomSection {
-    height: 50vh;
-
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('/public/bg6.png');
-    background-size: cover;
-    border-radius: 30px;
-}
-
-
-.bottomSection .bottomSearch {
-    margin-top: 13vw;
-
-
-}
-
-
 
 .road-container {
     text-align: center;
-    padding: 50px 20px;
+    padding: 50px;
 }
 
-.page-title {
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: #333;
-    
-}
+
 
 .road {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    margin-top: 50px;
 }
 
 .city {
@@ -144,7 +86,7 @@ body {
 }
 
 .city-circle {
-    background-color: #4CAF50;
+    background-color: rgb(42, 53, 143);
     color: white;
     border-radius: 50%;
     width: 50px;
@@ -165,7 +107,7 @@ body {
 .road-line {
     height: 5px;
     width: 100px;
-    background-color: #4CAF50;
+    background-color: rgb(42, 53, 143);
     position: absolute;
     top: 25px;
     left: 55px;
@@ -173,18 +115,14 @@ body {
 
 
 
-
-
-.map-container {
-    text-align: center;
-    padding: 50px 20px;
-}
-
 .page-title {
     font-size: 36px;
     margin-bottom: 20px;
     color: #333;
     
+}
+#about{
+    margin-top: 100px;
 }
 
 /* 
@@ -237,11 +175,10 @@ body {
 .feature-box h2 {
     margin: 0;
     margin-bottom: 10px;
-    color: #FF5733;
-
+    color: rgb(43, 40, 40);
 }
 
 .feature-box p {
     font-size: 1rem;
-    color: #555;
+    color: rgb(62, 62, 64);
 }
