@@ -88,7 +88,7 @@ const vendorSchema = new mongoose.Schema(
       type: Array,
     },
     tenants:{
-      type:Array
+      type:Array,
     }
   },
   { timestamps: true }

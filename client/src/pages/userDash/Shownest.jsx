@@ -2,9 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FaWifi, FaCar, FaTshirt, FaUtensils, FaSnowflake, FaDumbbell, FaCouch, FaBolt, FaBroom } from 'react-icons/fa';
 import Side from './side';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
 
 function Shownest() {
   const [vendorData, setVendorData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const userDetails = useSelector((state) => state.user.currentUser);
   const id = userDetails._id;
 
@@ -44,7 +50,8 @@ function Shownest() {
             <img
               src={vendor.imageURL[0]}
               alt={vendor.name}
-              className="w-full h-64 object-cover"
+              className="w-full h-64 object-cover cursor-pointer"
+              onClick={() => setShowModal(true)}
             />
           )}
 
@@ -92,6 +99,39 @@ function Shownest() {
           </div>
         </div>
       </div>
+
+      {/* Modal for Swiper Full-Size Images */}
+      {showModal && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+          onClick={() => setShowModal(false)}
+        >
+          <div className="relative w-full max-w-3xl">
+            <button
+              className="absolute top-4 right-4 text-white text-2xl font-bold z-50"
+              onClick={() => setShowModal(false)}
+            >
+              &times;
+            </button>
+            <Swiper
+              navigation
+              pagination={{ clickable: true }}
+              modules={[Navigation, Pagination]}
+              className="max-h-screen"
+            >
+              {vendor.imageURL.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={image}
+                    alt={`${vendor.name} - ${index + 1}`}
+                    className="w-full h-auto object-contain"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      )}
     </>
   );
 }

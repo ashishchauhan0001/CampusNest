@@ -46,7 +46,7 @@ function Showtenant() {
     // Handle click for Accept or Reject
     const handleClick = async (status, id) => {
         console.log("Status : ", status, " ID : ", id);
-        setClick(true)
+        // setClick(true)
 
         try {
             // API call to update the tenant status
@@ -124,10 +124,10 @@ function Showtenant() {
 
                                     <div className="action-buttons">
                                         <button onClick={() => handleClick('accepted', tenant._id)} className="action-button accept">
-                                            Accepted
+                                            Accept
                                         </button>
                                         <button onClick={() => handleClick('rejected', tenant._id)} className="action-button reject">
-                                            Rejected
+                                            Reject
                                         </button>
                                     </div>
 

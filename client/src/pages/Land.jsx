@@ -7,13 +7,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
+import {Link,useNavigate } from 'react-router-dom';
 
 SwiperCore.use([Navigation]);
 
+// const navigate=useNavigate();
 
-const handleClick=()=>{
-  alert('Open Searh.jsx');
-}
 
 
 const images = [
@@ -48,7 +47,7 @@ const Land = () => {
                 {/* Top section with text */}
                 <div className="topSection">
                 <div className="leftText">
-      <h1 style={{ fontWeight: 'bold', fontSize: '3.5rem', marginBottom: '125px' }} className='bg-gradient-to-r from-blue-600 via-purple-700 to-pink-700 text-transparent bg-clip-text'>
+      <h1 style={{ fontWeight: 'bold', fontSize: '3.5rem', marginBottom: '100px' }} className='bg-gradient-to-r from-blue-600 via-purple-700 to-pink-700 text-transparent bg-clip-text'>
         Find Your{' '}
         <span style={{ color: '#ef4444' }}>
           <Typewriter
@@ -64,8 +63,9 @@ const Land = () => {
         Here ...
       </h1>
 
-      <p className='text-slate-600'>
+      <p className='text-slate-600 items-start text-justify'>
         We offer unbiased opinions, room selection, PG student details, and personalized scores to
+        help you find the perfect home away from your home.We offer unbiased opinions, room selection, PG student details, and personalized scores to
         help you find the perfect home away from your home.We offer unbiased opinions, room selection, PG student details, and personalized scores to
         help you find the perfect home away from your home
       </p>
@@ -97,7 +97,7 @@ const Land = () => {
       spaceBetween={30}
         navigation
         loop={true} // Allows continuous loop sliding
-        className='mySwiper'
+        className='mySwiper mt-32'
       >
         {images.map((url, index) => (
           <SwiperSlide key={index}>
@@ -110,19 +110,16 @@ const Land = () => {
         ))}
       </Swiper>
 
-      <h1 className="text-5xl text-center mt-20 font-bold text-slate-600">
+      <h1 className="text-5xl text-center mt-32 font-bold text-slate-600">
   Why Choose Us?
 </h1>
-
             
-
             <About id='about' />
   <div className="text-center mb-16">
-            <button onClick={handleClick} className="px-14 py-5 text-xl bg-gradient-to-r from-slate-800 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:from-slate-800 hover:to-blue-500 hover:scale-105 transition-transform duration-300 ease-in-out">
+          <Link to={'/search'}>  <button  className="px-14 py-5 mt-16 text-xl bg-gradient-to-r from-slate-800 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:from-slate-800 hover:to-blue-500 hover:scale-105 transition-transform duration-300 ease-in-out">
   Find Your Nest
-</button>
+</button> </Link>
 </div>
-
         </>
 
     );
