@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Side from "./side";
 import { useSelector } from "react-redux";
+import PaymentButton from "../../components/PaymentButton";
 
 const Showstatus = () => {
   const [properties, setProperties] = useState([]);
@@ -21,13 +22,12 @@ const Showstatus = () => {
         }
       );
       console.log("Token sent successfully:", response.data);
-      alert("Token sent successfully!");
+      // alert("Token sent successfully!");
     } catch (error) {
       console.error("Error sending token:", error);
       alert("Failed to send token.");
     }
     console.log(profile,33);
-    
   };
 
   useEffect(() => {
@@ -139,7 +139,7 @@ const Showstatus = () => {
                   disabled={property.status !== "accepted"}
                   onClick={() => handleClick(property.profile,property.vendorId)}
                 >
-                  Send Token
+                  <PaymentButton amount={property.security} />
                 </button>
               </div>
             </div>
