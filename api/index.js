@@ -7,6 +7,7 @@ import listingRouter from './routes/listing.route.js';
 import listingVendor from './routes/vendor.route.js';
 import addrequest from './routes/request.route.js'
 import tenant from './routes/tenant.route.js'
+import addPayment from './routes/razorpay.route.js'
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import cors from 'cors';
@@ -45,6 +46,7 @@ app.use('/api/listing', listingRouter);
 app.use('/api/vendor', listingVendor);
 app.use('/api/tenant',tenant);
 app.use('/api/request',addrequest);
+app.use("/api/payment", addPayment);
 
 
 
