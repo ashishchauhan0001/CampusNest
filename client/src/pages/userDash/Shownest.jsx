@@ -96,8 +96,12 @@ function Shownest() {
                 {vendor.houseKeeping && <Amenity icon={<FaBroom />} label="House Keeping" />}
               </div>
             </div>
+            
           </div>
         </div>
+        {/* review section */}
+        
+       
       </div>
 
       {/* Modal for Swiper Full-Size Images */}

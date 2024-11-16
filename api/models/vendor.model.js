@@ -89,6 +89,9 @@ const vendorSchema = new mongoose.Schema(
     },
     tenants:{
       type:Array,
+    },
+    calendar:{
+      type:String,
     }
   },
   { timestamps: true }

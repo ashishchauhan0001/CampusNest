@@ -164,6 +164,10 @@ const RegisterVendor = () => {
                     <TextField label="Number of Rooms" fullWidth
                      required type="number" value={rooms} onChange={handleRoomsChange} />
                 </Grid>
+                <Grid item xs={12} >
+                    <TextField label="Paste your Google Calendar link" fullWidth
+                     required   name="calendar" onChange={handleInputChange} />
+                </Grid>
 
                 {/* Upload Photos Section */}
                 <Grid item xs={12}>
