@@ -34,6 +34,7 @@ const Property = () => {
     fetchProperty();
   }, [params.listingId]);
 
+
   const handleImageClick = (img) => {
     setSelectedImage(img);
     setIsModalOpen(true);
@@ -75,6 +76,9 @@ const Property = () => {
   const handleContactClick = () => {
     navigate('/landlord-contact');
   };
+  const handletourClick = () => {
+    window.open(property.calendar);
+  };
 
   if (!property) {
     return (
@@ -85,6 +89,8 @@ const Property = () => {
   }
 
   return (
+
+
     <div className="p-6 bg-gradient-to-br from-blue-50 to-gray-100 min-h-screen flex flex-col items-center">
       <div className="max-w-3xl w-full bg-white shadow-2xl rounded-lg overflow-hidden">
         {/* Swiper for Property Images */}
@@ -166,6 +172,16 @@ const Property = () => {
             >
               Contact Landlord
             </button>
+            {property.calendar && (
+              <button
+                onClick={handletourClick}
+                className="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition duration-300"
+              >
+                Request Property Tour
+              </button>
+            )}
+
+
           </div>
         </div>
       </div>

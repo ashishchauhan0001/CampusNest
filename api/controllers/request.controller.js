@@ -66,8 +66,7 @@ export const getProperty = async (req, res, next) => {
   
       // Find the RequestData document by its ID and populate the vendorListingId field
       const responseData = await requestData.find({"tenantData.userID" : id}).populate('propertyId');
-  
-      // Check if the document was found
+ 
       if (!responseData) {
         return res.status(404).json({ message: 'Property not found' });
       }
