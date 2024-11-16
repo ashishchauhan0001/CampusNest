@@ -7,12 +7,19 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
+import CommentForm from '../../components/CommentForm';
 
 function Shownest() {
   const [vendorData, setVendorData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const userDetails = useSelector((state) => state.user.currentUser);
   const id = userDetails._id;
+  const [comments, setComments] = useState([]);
+
+  // Update comments when a new comment is added
+  const handleCommentAdded = (updatedComments) => {
+    setComments(updatedComments);
+  };
 
   // Fetch vendor listing data from the backend
   useEffect(() => {
@@ -21,6 +28,7 @@ function Shownest() {
         const response = await fetch(`http://localhost:3000/api/vendor/getnest/${id}`);
         const data = await response.json();
         setVendorData(data);
+        
       } catch (error) {
         console.error('Error fetching vendor data:', error);
       }
@@ -39,6 +47,7 @@ function Shownest() {
   }
 
   const vendor = vendorData[0]; // Displaying only one property
+  console.log("PropertyID: ",vendor._id);
 
   return (
     <>
@@ -98,8 +107,14 @@ function Shownest() {
             </div>
             
           </div>
+          <CommentForm propertyID={vendor._id} onCommentAdded={handleCommentAdded} />
         </div>
         {/* review section */}
+
+      {/* Add Comment Form */}
+      
+    
+
         
        
       </div>

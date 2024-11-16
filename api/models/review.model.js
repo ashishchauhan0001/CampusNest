@@ -4,7 +4,7 @@ import mongoose, { Schema } from "mongoose";
 const review = new mongoose.Schema(
     {
         propertyId: {
-            type: mongoose.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'VendorListing',
 
         },
