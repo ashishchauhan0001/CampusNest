@@ -16,6 +16,9 @@ const Dash = () => {
                 <li>
                     <Link to="/view-tenants">View Tenants</Link>
                 </li>
+                <li>
+                    <Link to="/view-dash">View DashBoard</Link>
+                </li>
             </ul>
         </div>
     );

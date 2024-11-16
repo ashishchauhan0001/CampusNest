@@ -12,7 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/material": "^6.1.6",
+    "@mui/material": "^6.1.7",
+    "@mui/styled-engine-sc": "^6.1.7",
+    "@mui/x-charts": "^7.22.2",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.7.7",
     "firebase": "^10.14.0",
@@ -27,6 +29,7 @@
     "react-router-dom": "^6.26.2",
     "react-simple-typewriter": "^5.0.1",
     "redux-persist": "^6.0.0",
+    "styled-components": "^6.1.13",
     "swiper": "^10.3.1"
   },
   "devDependencies": {

@@ -17,6 +17,8 @@ import LandlordContact from './components/LandlordContact';
 import Showstatus from './pages/userDash/Showstatus';
 import Shownest from './pages/userDash/Shownest'
 import Footer from './components/Footer'
+import MapSearch from './components/MapSearch';
+import Statistics from './components/Statistics';
 
 export default function App() {
   return (
@@ -38,6 +40,8 @@ export default function App() {
         <Route path='/rent' element={<Showstatus />} />
         <Route path="/landlord-contact" element={<LandlordContact />} />
         <Route path="/nest" element={<Shownest/>}/> 
+        <Route path="/map-search" element={<MapSearch/>}/> 
+        <Route path="/view-dash" element={<Statistics/>}/> 
           {/*  */}
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
