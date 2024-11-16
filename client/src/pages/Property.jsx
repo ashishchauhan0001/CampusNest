@@ -8,6 +8,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import './property.css';
+import CommentsSection from '../components/CommentSection';
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
@@ -180,11 +181,16 @@ const Property = () => {
                 Request Property Tour
               </button>
             )}
-
-
+            
           </div>
         </div>
+      {/* Other property details here */}
+      <CommentsSection propertyID={property._id} />
       </div>
+      {/* Comment Section starts here */}
+      
+      
+  
     </div>
   );
 };

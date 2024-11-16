@@ -21,7 +21,6 @@ const addReview = async (req, res) => {
     let reviewDoc = await reviewData.findOne({ propertyId });
 
     if (!reviewDoc) {
-
       reviewDoc = new reviewData({
         propertyId,
         review: [newReview],
@@ -44,12 +43,16 @@ const addReview = async (req, res) => {
 const getReviews = async (req, res) => {
   try {
     const propertyId = req.params.id;
+    // const propertyId = "67338f1d104ad624c30c53f7";
+    // console.log("PropertyID : ",propertyId);
+    
 
     if (!propertyId) {
       return res.status(400).json({ message: "Property ID is required." });
     }
 
-    const reviewDoc = await reviewData.findOne({ propertyId });
+    const reviewDoc = await reviewData.findOne({"propertyId": propertyId });
+    
 
     if (!reviewDoc) {
       return res.status(404).json({ message: "No reviews found for this property." });
@@ -57,7 +60,7 @@ const getReviews = async (req, res) => {
 
     res.status(200).json({
       message: "Reviews fetched successfully.",
-      reviews: reviewDoc.review,
+      reviews: reviewDoc,
     });
   } catch (error) {
     console.error("Error fetching reviews:", error);
