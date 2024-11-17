@@ -115,14 +115,15 @@ function Showtenant() {
                                     <div>
                                         <strong>Experience:</strong> {tenant.tenantData.experience} years
                                     </div>
+                                    
+
+                                    <div className="action-buttons">
                                     <button
                                         onClick={() => window.open(tenant.tenantData.aadhaarURL, '_blank')}
                                         className="view-id-btn"
                                     >
                                         View Govt ID
                                     </button>
-
-                                    <div className="action-buttons">
                                         <button onClick={() => handleClick('accepted', tenant._id)} className="action-button accept">
                                             Accept
                                         </button>
