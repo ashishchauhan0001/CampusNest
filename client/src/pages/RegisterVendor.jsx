@@ -19,6 +19,7 @@ const RegisterVendor = () => {
         address: '',
         state: '',
         city: '',
+        type:'',
         rent: 0,
         security: 0,
         marketDistance: 0,
@@ -177,6 +178,26 @@ const RegisterVendor = () => {
                         onChange={handleFileChange} style={{ display: 'none' }} />
                     </div>
                     {selectedFiles.length > 0 && <p>{selectedFiles.length} file(s) selected</p>}
+                </Grid>
+
+                <Grid item xs={12}>
+                    <TextField
+                        select
+                      
+                        fullWidth
+                        required
+                        name="type"
+                        value={vendorDetails.type}
+                        onChange={handleInputChange}
+                        SelectProps={{
+                            native: true,
+                        }}
+                    >
+                        <option value="">Select Type</option>
+                        <option value="Boys">Boys</option>
+                        <option value="Girls">Girls</option>
+                        <option value="Girls">Both</option>
+                    </TextField>
                 </Grid>
 
                 {/* Amenities Section */}
