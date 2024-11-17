@@ -11,6 +11,9 @@ const vendorSchema = new mongoose.Schema(
       required: true,
 
     },
+    type: {
+      type: String,
+    },
     description: {
       type: String,
 
@@ -87,11 +90,11 @@ const vendorSchema = new mongoose.Schema(
     imageURL: {
       type: Array,
     },
-    tenants:{
-      type:Array,
+    tenants: {
+      type: Array,
     },
-    calendar:{
-      type:String,
+    calendar: {
+      type: String,
     }
   },
   { timestamps: true }

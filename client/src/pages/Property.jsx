@@ -143,6 +143,7 @@ const Property = () => {
             <p><span className="font-bold">Security Deposit:</span> ₹{property.security}</p>
             <p><span className="font-bold">Market Distance:</span> {property.marketDistance} km</p>
             <p><span className="font-bold">Available Rooms:</span> {property.availRooms}</p>
+            <p><span className="font-bold">Hostel Type:</span> {property.type}</p>
           </div>
 
           {/* Amenities */}
