@@ -74,7 +74,6 @@ export const getVendor = async (req, res, next) => {
 // Get all vendor listings
 export const getVendors = async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit) || 8;
     const startIndex = parseInt(req.query.startIndex) || 0;
 
     // Parse amenities from JSON string in query
@@ -96,6 +95,12 @@ export const getVendors = async (req, res) => {
     const searchTerm = req.query.searchTerm || "";
     const sortField = req.query.sort || "createdAt";
     const order = req.query.order === "asc" ? 1 : -1;
+    const type = req.query.type || "all";
+
+    // Add type condition if type is not "all"
+    if (type !== "all") {
+      filters.type = type; // Assuming your database has a `type` field with values like "girls", "boys", or "both".
+    }
 
     // MongoDB query
     const listings = await VendorListing.find({
@@ -103,10 +108,9 @@ export const getVendors = async (req, res) => {
         { name: { $regex: searchTerm, $options: "i" } },
         { address: { $regex: searchTerm, $options: "i" } }
       ],
-      ...filters,
+      ...filters, // Includes amenities and type filters
     })
-      .sort({ rent: order })
-      .limit(limit)
+      .sort({ [sortField]: order }) // Sort by dynamic field
       .skip(startIndex);
 
     res.status(200).json(listings);
@@ -115,6 +119,7 @@ export const getVendors = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch vendors." });
   }
 };
+
 
 export const addProfile = async (req, res, next) => {
   try {

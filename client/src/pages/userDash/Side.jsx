@@ -4,7 +4,7 @@ import '../vendor/Dash.css';
 
 const Side = () => {
     return (
-        <div className="dash">
+        <div className="dash ">
 
             <ul>
                 <li>

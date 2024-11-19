@@ -15,7 +15,8 @@
     color: #111010; /* Light text for readability */
     border-radius: 30px;
     margin-top: 40px;
-    /* margin-bottom: 1vh; */
+    position: sticky;
+    top:0; 
     height: auto;
 }
 

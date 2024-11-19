@@ -46,8 +46,8 @@ function Footer() {
 
         {/* Contact Information */}
         <div className="text-center mb-5 space-y-1">
-          <p className="text-gray-400 hover:text-white transition-colors duration-300">📞 +91 8171065385</p>
-          <p className="text-gray-400 hover:text-white transition-colors duration-300">✉️ asch20080@gmail.com</p>
+          <p className="text-gray-400 hover:text-white transition-colors duration-300">📞 +91 9999999999</p>
+          <p className="text-gray-400 hover:text-white transition-colors duration-300">✉️ campusnest@gmail.com</p>
         </div>
 
         {/* Quick Links Section */}
