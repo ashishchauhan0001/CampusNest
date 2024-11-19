@@ -14,9 +14,6 @@ export default function Card({ listing }) {
   console.log(org,67);
 
   useEffect(() => {
-
-
-
     if (org) {
       const fetchOrganizationCount = async () => {
         try {
@@ -41,7 +38,7 @@ export default function Card({ listing }) {
   }, []);
 
   return (
-    <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
+    <div className='bg-white shadow-md hover:shadow-lg  transition-shadow overflow-hidden rounded-lg  sm:w-[400px] '>
       {/* <Link to={`/listing/${listing._id}`}> */}
       <Link to={`/property/${listing._id}`}>
         {/* Image Section */}

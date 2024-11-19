@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -12,15 +13,27 @@ import BuildProfile from './pages/BuildProfile';
 import Dash from './pages/vendor/dash';
 import Property from './pages/Property';
 import Showlist from './pages/vendor/Showlist';
-import Showtenant from './pages/vendor/Showtenant'
+import Showtenant from './pages/vendor/Showtenant';
 import LandlordContact from './components/LandlordContact';
 import Showstatus from './pages/userDash/Showstatus';
-import Shownest from './pages/userDash/Shownest'
-import Footer from './components/Footer'
+import Shownest from './pages/userDash/Shownest';
+import Footer from './components/Footer';
 import MapSearch from './components/MapSearch';
 import Statistics from './components/Statistics';
+import Loader from './components/Loader'; 
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000); 
+    return () => clearTimeout(timer); 
+  }, []);
+
+  if (loading) {
+    return <Loader />; 
+  }
+
   return (
     <BrowserRouter>
       <Header />
@@ -39,15 +52,14 @@ export default function App() {
         <Route path='/view-tenants' element={<Showtenant />} />
         <Route path='/rent' element={<Showstatus />} />
         <Route path="/landlord-contact" element={<LandlordContact />} />
-        <Route path="/nest" element={<Shownest/>}/> 
-        <Route path="/map-search" element={<MapSearch/>}/> 
-        <Route path="/view-dash" element={<Statistics/>}/> 
-          {/*  */}
+        <Route path="/nest" element={<Shownest />} />
+        <Route path="/map-search" element={<MapSearch />} />
+        <Route path="/view-dash" element={<Statistics />} />
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
         </Route>
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }

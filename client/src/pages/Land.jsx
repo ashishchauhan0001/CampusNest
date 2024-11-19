@@ -8,6 +8,7 @@ import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import { Link, useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 SwiperCore.use([Navigation]);
 
@@ -63,7 +64,7 @@ const Land = () => {
                   delaySpeed={1000}
                 />
               </span>
-              Here ...
+              Here
             </h1>
 
             <p className="text-slate-600 items-start text-justify">

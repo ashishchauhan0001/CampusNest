@@ -7,7 +7,7 @@ export default function Search() {
   const navigate = useNavigate();
   const [sidebardata, setSidebardata] = useState({
     searchTerm: '',
-    // type: 'all',
+    type: 'all',
     amenities: {
       parking: false,
       furnished: false,
@@ -25,7 +25,6 @@ export default function Search() {
 
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
-  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -34,17 +33,18 @@ export default function Search() {
     const amenitiesFromUrl = urlParams.get('amenities');
     const sortFromUrl = urlParams.get('sort');
     const orderFromUrl = urlParams.get('order');
+    const propTypeFromUrl=urlParams.get('type');
 
     if (
       searchTermFromUrl ||
-      // typeFromUrl ||
       amenitiesFromUrl ||
       sortFromUrl ||
-      orderFromUrl
+      orderFromUrl ||
+      propTypeFromUrl
     ) {
       setSidebardata({
         searchTerm: searchTermFromUrl || '',
-        // type: typeFromUrl || 'all',
+        type: propTypeFromUrl || 'all',
         amenities: amenitiesFromUrl ? JSON.parse(amenitiesFromUrl) : sidebardata.amenities,
         sort: sortFromUrl || 'created_at',
         order: orderFromUrl || 'desc',
@@ -53,7 +53,6 @@ export default function Search() {
 
     const fetchListings = async () => {
       setLoading(true);
-      setShowMore(false);
       const searchQuery = urlParams.toString();
       console.log("TESTING : - ", searchQuery);
       
@@ -63,11 +62,6 @@ export default function Search() {
       const data = await res.json();
       console.log("DATA : ", data);
       
-      if (data.length > 8) {
-        setShowMore(true);
-      } else {
-        setShowMore(false);
-      }
       setListings(data);
       setLoading(false);
     };
@@ -86,6 +80,12 @@ export default function Search() {
       const [sort, order] = value.split('_');
       setSidebardata({ ...sidebardata, sort, order });
     }
+    
+    if(id === 'prop_type'){
+      console.log("TYPE : " , value);
+      
+      setSidebardata({ ...sidebardata, type: value });
+    }
 
     if (e.target.type === 'checkbox') {
       setSidebardata({
@@ -97,16 +97,14 @@ export default function Search() {
       });
     }
 
-    // if (id === 'type') {
-    //   setSidebardata({ ...sidebardata, type: value });
-    // }
+
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
     urlParams.set('searchTerm', sidebardata.searchTerm);
-    // urlParams.set('type', sidebardata.type);
+    urlParams.set('type', sidebardata.type);
     urlParams.set('amenities', JSON.stringify(sidebardata.amenities));
     urlParams.set('sort', sidebardata.sort);
     urlParams.set('order', sidebardata.order);
@@ -114,31 +112,11 @@ export default function Search() {
     navigate(`/search?${searchQuery}`);
   };
 
-  const onShowMoreClick = async () => {
-    const numberOfListings = listings.length;
-    const startIndex = numberOfListings;
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set('startIndex', startIndex);
-    const searchQuery = urlParams.toString();
-    
-    console.log(searchQuery,"Next Data");
-    
-
-    // const res = await fetch(`/api/listing/get?${searchQuery}`);
-    const res = await fetch(`http://localhost:3000/api/vendor/allvendors?${searchQuery}`);
-    const data = await res.json();
-    console.log(data);
-    
-    
-    if (data.length < 9) {
-      setShowMore(false);
-    }
-    setListings([...listings, ...data]);
-  };
 
   return (
     <div className="search-container">
-      <div className="sidebar">
+      <div className="sidebar sticky top-10 p-5 bg-red-100 min-w-[250px] h-[calc(100vh-40px)] rounded-lg border-r-2 border-gray-300 shadow-md ">
+
         <form onSubmit={handleSubmit} className="search-form">
           <div className="form-group">
             <label>Search Term:</label>
@@ -235,6 +213,15 @@ export default function Search() {
               <span>House Keeping</span>
             </div>
           </div>
+          <div className="form-group">
+            <label>Property Type :</label>
+            <select onChange={handleChange} id="prop_type">
+              <option value="all">All</option>
+              <option value="Both">Both</option>
+              <option value="Girls">Boys</option>
+              <option value="Boys">Girls</option>
+            </select>
+          </div>
 
           <div className="form-group">
             <label>Sort:</label>
@@ -263,11 +250,6 @@ export default function Search() {
           //  Card 
         )}
 
-        {showMore && (
-          <button onClick={onShowMoreClick} className="show-more">
-            Show more
-          </button>
-        )}
       </div> 
     </div>
   );
