@@ -20,18 +20,23 @@ import Shownest from './pages/userDash/Shownest';
 import Footer from './components/Footer';
 import MapSearch from './components/MapSearch';
 import Statistics from './components/Statistics';
-import Loader from './components/Loader'; 
+import Loader from './components/Loader';
+import toast, { Toaster } from 'react-hot-toast';
+// import { ToastContainer, toast } from "react-toastify";
+
 
 export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000); 
-    return () => clearTimeout(timer); 
+
+    const timer = setTimeout(() => setLoading(false), 3000);
+    return () => clearTimeout(timer);
+
   }, []);
 
   if (loading) {
-    return <Loader />; 
+    return <Loader />;
   }
 
   return (
@@ -60,6 +65,7 @@ export default function App() {
         </Route>
       </Routes>
       <Footer />
+      <Toaster/>
     </BrowserRouter>
   );
 }

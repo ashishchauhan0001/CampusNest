@@ -7,6 +7,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './profile.css';
 import { useDispatch } from 'react-redux';
 import { build, org } from '../redux/user/userSlice.js';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BuildProfile = () => {
     const dispatch = useDispatch();
@@ -85,7 +86,8 @@ const BuildProfile = () => {
              
             const response = await axios.post('http://localhost:3000/api/tenant/addtenant', profileData);
             if (response.data.success) {
-                alert('Profile created successfully');
+         
+                toast.success('Profile created successfully');
                 dispatch(build(true));
                 console.log(tenantDetails.organization,899);
                 dispatch(org(tenantDetails.organization));
@@ -93,7 +95,8 @@ const BuildProfile = () => {
             } 
         } catch (error) {
             console.error('Error creating profile:', error);
-            alert('Failed to create profile: Network or server error');
+            toast.error('Failed to create profile: Network or server error');
+          
         }
     };
 

@@ -5,6 +5,7 @@ import { Button, TextField, Grid } from '@mui/material';
 import { storage } from '../firebase'; // import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './vend.css';
+import toast, { Toaster } from 'react-hot-toast';
 
 const RegisterVendor = () => {
     const userDetails = useSelector((state) => state.user.currentUser);
@@ -102,13 +103,16 @@ const RegisterVendor = () => {
 
             const response = await axios.post('http://localhost:3000/api/vendor/addvendor', vendorData);
             if (response.data.success) {
-                alert('Vendor Registered Successfully');
+                toast.success('Vendor Registered Successfully');
+                
             } else {
-                alert('Failed to Register Vendor: ' + response.data.message);
+                toast.error('Failed to Register Vendor: ' + response.data.message);
+
             }
         } catch (error) {
             console.error('Error registering vendor:', error);
-            alert('Failed to Register Vendor: Network or Server error');
+            toast.error('Failed to Register Vendor: Network or Server error');
+            
         }
     };
 
