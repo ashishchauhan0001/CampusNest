@@ -32,8 +32,8 @@ const About = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-75"></div>
               <div className="absolute bottom-0 p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">Unbiased Opinion</h2>
-                <p>We provide honest and impartial reviews of various PG accommodations to help you make the best decision.</p>
+                <h2 className="text-2xl font-bold mb-2">Affordable Pricing</h2>
+                <p>CampusNest offers budget-friendly living spaces, ensuring quality accommodation without financial strain</p>
               </div>
             </div>
           </SwiperSlide>
@@ -48,8 +48,8 @@ const About = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-75"></div>
               <div className="absolute bottom-0 p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">Choose Roommate</h2>
-                <p>Select compatible roommates based on your preferences to ensure a harmonious living environment.</p>
+                <h2 className="text-2xl font-bold mb-2">Virtual Tours & Scheduling</h2>
+                <p>Request virtual property tours or schedule meetings easily, a feature not commonly offered elsewhere.</p>
               </div>
             </div>
           </SwiperSlide>
@@ -64,8 +64,8 @@ const About = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-75"></div>
               <div className="absolute bottom-0 p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">PG Student Details</h2>
-                <p>Get detailed information about other PG students to understand the environment and community.</p>
+                <h2 className="text-2xl font-bold mb-2">Authentic Reviews</h2>
+                <p>Only verified tenants can leave reviews, ensuring genuine and reliable feedback for every property.</p>
               </div>
             </div>
           </SwiperSlide>
@@ -80,8 +80,8 @@ const About = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-75"></div>
               <div className="absolute bottom-0 p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">Suitability Score</h2>
-                <p>Our system evaluates your preferences and provides a score to determine if a PG is a good fit for you.</p>
+                <h2 className="text-2xl font-bold mb-2">Request Booking Feature</h2>
+                <p>Landlords can vet tenants through a booking request system, approving or rejecting profiles with ease.</p>
               </div>
             </div>
           </SwiperSlide>
@@ -111,8 +111,8 @@ const About = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-75"></div>
               <div className="absolute bottom-0 p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">Choose Roommate</h2>
-                <p>Select compatible roommates based on your preferences to ensure a harmonious living environment.</p>
+                <h2 className="text-2xl font-bold mb-2">Secure Payments</h2>
+                <p>CampusNest offers a seamless payment experience with integrated Razorpay for secure token and security money transactions.</p>
               </div>
             </div>
           </SwiperSlide>
@@ -127,8 +127,8 @@ const About = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-75"></div>
               <div className="absolute bottom-0 p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">PG Student Details</h2>
-                <p>Get detailed information about other PG students to understand the environment and community.</p>
+                <h2 className="text-2xl font-bold mb-2">Vendor-Friendly Dashboard</h2>
+                <p>Landlords and vendors benefit from a dedicated dashboard to track property performance and statistics effortlessly.</p>
               </div>
             </div>
           </SwiperSlide>
@@ -143,8 +143,8 @@ const About = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-75"></div>
               <div className="absolute bottom-0 p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">Suitability Score</h2>
-                <p>Our system evaluates your preferences and provides a score to determine if a PG is a good fit for you.</p>
+                <h2 className="text-2xl font-bold mb-2">Advanced Search Filters</h2>
+                <p>Find properties that meet your specific needs with filters for amenities and other unique preferences.</p>
               </div>
             </div>
           </SwiperSlide>

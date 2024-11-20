@@ -125,6 +125,8 @@ export default function Search() {
               id="searchTerm"
               placeholder="Search..."
               value={sidebardata.searchTerm}
+              minLength="2"
+              maxLength="12"
               onChange={handleChange}
             />
           </div>

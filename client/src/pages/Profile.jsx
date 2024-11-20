@@ -140,7 +140,14 @@ export default function Profile() {
   // };
 
   return (
-    <div className='p-3 max-w-lg mx-auto'>
+    <div
+      className="-mt-20 h-auto w-full bg-cover bg-center flex items-center justify-center"
+      style={{
+        backgroundImage:
+          "url('https://plus.unsplash.com/premium_photo-1687960116228-13d383d20188?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
+      }}
+    >
+    <div className='mt-32 p-6 max-w-lg w-full h-full bg-white bg-opacity-90 rounded-lg shadow-lg'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
@@ -236,6 +243,7 @@ export default function Profile() {
       <button onClick={handleButtonClick} className='bg-green-700 w-full text-white p-3 rounded-lg uppercase text-center hover:opacity-95'>
         Show Listings
       </button>
+    </div>
     </div>
   );
 }

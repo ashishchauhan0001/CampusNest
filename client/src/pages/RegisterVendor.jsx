@@ -193,7 +193,7 @@ const RegisterVendor = () => {
                             native: true,
                         }}
                     >
-                        <option value="">Select Type</option>
+                        <option value="">Select Type :</option>
                         <option value="Boys">Boys</option>
                         <option value="Girls">Girls</option>
                         <option value="Girls">Both</option>
