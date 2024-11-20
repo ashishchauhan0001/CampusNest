@@ -3,6 +3,7 @@ import { app } from '../firebase.js';
 import { useDispatch } from 'react-redux';
 import { signInSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
+import url from '../url.jsx';
 
 export default function OAuth() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function OAuth() {
        
       // console.log("Ashish : ",result.user.photoURL);
 
-      const res = await fetch('/api/auth/google', {
+      const res = await fetch(`${url}/api/auth/google`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

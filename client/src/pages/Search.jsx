@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './search.css'; 
 import Card from '../components/Card.jsx'
+import url from '../url.jsx';
 
 export default function Search() {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ export default function Search() {
       console.log("TESTING : - ", searchQuery);
       
       // const res = await fetch(`/api/listing/get?${searchQuery}`);
-      const res = await fetch(`http://localhost:3000/api/vendor/allvendors?${searchQuery}`);
+      const res = await fetch(`${url}/api/vendor/allvendors?${searchQuery}`);
       console.log("RESPONSE : ", res);
       const data = await res.json();
       console.log("DATA : ", data);

@@ -5,6 +5,7 @@ import axios from "axios";
 import { Card, Typography, CircularProgress, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import url from '../url.jsx';
 
 export default function Statistics() {
   const [chartData, setChartData] = React.useState({
@@ -26,7 +27,7 @@ export default function Statistics() {
     const fetchVendorData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/vendor/getvendor/${id}`
+          `${url}/api/vendor/getvendor/${id}`
         );
         const vendorData = response.data;
         const tenants = response.data[0]?.tenants || [];

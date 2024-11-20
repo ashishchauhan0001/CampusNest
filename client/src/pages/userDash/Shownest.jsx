@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 import CommentForm from '../../components/CommentForm';
+import url from '../../url.jsx';
 
 function Shownest() {
   const [vendorData, setVendorData] = useState([]);
@@ -25,7 +26,7 @@ function Shownest() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/vendor/getnest/${id}`);
+        const response = await fetch(`${url}/api/vendor/getnest/${id}`);
         const data = await response.json();
         setVendorData(data);
         

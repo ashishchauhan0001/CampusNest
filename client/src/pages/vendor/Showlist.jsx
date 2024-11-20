@@ -4,6 +4,7 @@ import Dash from './dash';
 import './showlist.css';
 import { useSelector } from 'react-redux';
 import Card from '../../components/Card';
+import url from '../../url.jsx';
 
 const Showlist = () => {
     const userDetails = useSelector((state) => state.user.currentUser);
@@ -16,7 +17,7 @@ const Showlist = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/vendor/getvendor/${id}`);
+                const response = await axios.get(`${url}/api/vendor/getvendor/${id}`);
                 setProperties(response.data);
 
 

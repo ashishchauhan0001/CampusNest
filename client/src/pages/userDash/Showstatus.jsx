@@ -3,6 +3,7 @@ import axios from "axios";
 import Side from "./side";
 import { useSelector } from "react-redux";
 import PaymentButton from "../../components/PaymentButton";
+import url from '../../url.jsx';
 
 const Showstatus = () => {
   const [properties, setProperties] = useState([]);
@@ -16,7 +17,7 @@ const Showstatus = () => {
     
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/vendor/addprofile/${vendorId}`,
+        `${url}/api/vendor/addprofile/${vendorId}`,
         {
           profile: profile,
         }
@@ -34,7 +35,7 @@ const Showstatus = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/request/getproperty/${id}`
+          `${url}/api/request/getproperty/${id}`
         );
         const responseData = response.data.responseData;
         const formattedProperties = responseData.map((item) => ({

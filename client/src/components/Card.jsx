@@ -6,6 +6,7 @@ import { BiDumbbell } from 'react-icons/bi';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import url from '../url.jsx';
 
 export default function Card({ listing }) {
 
@@ -19,7 +20,7 @@ export default function Card({ listing }) {
       const fetchOrganizationCount = async () => {
         try {
 
-          const response = await axios.get(`http://localhost:3000/api/vendor/getcount/${org}`, {
+          const response = await axios.get(`${url}/api/vendor/getcount/${org}`, {
             params: {
               id: listing._id,
             },

@@ -8,6 +8,7 @@ import './profile.css';
 import { useDispatch } from 'react-redux';
 import { build, org } from '../redux/user/userSlice.js';
 import toast, { Toaster } from 'react-hot-toast';
+import url from '../url.jsx';
 
 const BuildProfile = () => {
     const dispatch = useDispatch();
@@ -84,7 +85,7 @@ const BuildProfile = () => {
                 aadhaarURL: aadhaarImageURL, // Add uploaded Aadhaar image URL
             };
              
-            const response = await axios.post('http://localhost:3000/api/tenant/addtenant', profileData);
+            const response = await axios.post(`${url}/api/tenant/addtenant`, profileData);
             if (response.data.success) {
          
                 toast.success('Profile created successfully');
