@@ -6,6 +6,7 @@ import { GiConsoleController } from 'react-icons/gi';
 import "./showlist.css";
 import Dash from './dash';
 import toast, { Toaster } from 'react-hot-toast';
+import url from '../../url.jsx';
 
 function Showtenant() {
     const [tenantData, setTenantData] = useState(null);
@@ -26,7 +27,7 @@ function Showtenant() {
 
             try {
                 // Call the API to fetch tenant data
-                const response = await axios.get(`http://localhost:3000/api/request/getrequest/${userId}`);
+                const response = await axios.get(`${url}/api/request/getrequest/${userId}`);
                 const tenants = response.data.request.map(req => req.tenantData.tenant);
 
                 if (response.status === 201) {
@@ -51,7 +52,7 @@ function Showtenant() {
 
         try {
             // API call to update the tenant status
-            const response = await axios.put(`http://localhost:3000/api/request/updateStatus/${id}`, {
+            const response = await axios.put(`${url}/api/request/updateStatus/${id}`, {
                 status: status,
             });
 

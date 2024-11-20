@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
+import url from '../url.jsx';
 
 const CommentsSection = ({ propertyID }) => {
   const [comments, setComments] = useState([]);
@@ -12,7 +13,7 @@ const CommentsSection = ({ propertyID }) => {
   const fetchComments = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/review/getreview/${propertyID}`);
+      const response = await axios.get(`${url}/api/review/getreview/${propertyID}`);
       const reviews = response.data.reviews.review;
       const commentsArray = reviews.map((item) => item.comments);
       const ratingsArray = reviews.map((item) => item.rating);

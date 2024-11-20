@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import url from '../url.jsx';
 
 const PaymentButton = ({ amount }) => {
   const loadRazorpayScript = () => {
@@ -13,7 +14,7 @@ const PaymentButton = ({ amount }) => {
   const handlePayment = async () => {
     try {
       // Create order on the server
-      const { data } = await axios.post("http://localhost:3000/api/payment/create-order", { amount });
+      const { data } = await axios.post(`${url}/api/payment/create-order`, { amount });
 
       const options = {
         key: "rzp_test_FRFdoaNdjz8LjW",
@@ -30,7 +31,7 @@ const PaymentButton = ({ amount }) => {
           };
 
           // Verify payment signature on the server
-          const verifyResponse = await axios.post("http://localhost:3000/api/payment/verify-payment", paymentData);
+          const verifyResponse = await axios.post(`${url}/api/payment/verify-payment`, paymentData);
 
           if (verifyResponse.data.success) {
             alert("Payment Successful!");

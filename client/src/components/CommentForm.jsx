@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import url from '../url.jsx';
 
 const CommentForm = ({ propertyID, onCommentAdded }) => {
   const [comment, setComment] = useState("");
@@ -32,7 +33,7 @@ const CommentForm = ({ propertyID, onCommentAdded }) => {
     setSuccess("");
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/review/addreview`, {
+      const response = await axios.post(`${url}/api/review/addreview`, {
         "propertyId":propertyID,
         "userId":id,
         "comments":comment,

@@ -10,6 +10,7 @@ import 'swiper/css/bundle';
 import './property.css';
 import CommentsSection from '../components/CommentSection';
 import toast, { Toaster } from 'react-hot-toast';
+import url from '../url.jsx';
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
@@ -27,7 +28,7 @@ const Property = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/vendor/getvendor/${params.listingId}`);
+        const response = await axios.get(`${url}/api/vendor/getvendor/${params.listingId}`);
         setProperty(response.data[0]);
       } catch (err) {
         setError('Failed to load property details.');
@@ -56,7 +57,7 @@ const Property = () => {
         navigate('/build');
         return;
       }
-      const response = await axios.get(`http://localhost:3000/api/tenant/gettenant/${id}`);
+      const response = await axios.get(`${url}/api/tenant/gettenant/${id}`);
       if (response.status === 200) {
         const tenantData = response.data.tenant;
         const data = {
@@ -71,7 +72,7 @@ const Property = () => {
           return;
         }
 
-        const postResponse = await axios.post('http://localhost:3000/api/request/addrequest', data);
+        const postResponse = await axios.post(`${url}/api/request/addrequest`, data);
         if (postResponse.status === 201) {
           toast.success("Request sent successfully!");
         } else {

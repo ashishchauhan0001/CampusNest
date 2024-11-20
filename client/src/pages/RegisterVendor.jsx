@@ -6,6 +6,7 @@ import { storage } from '../firebase'; // import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './vend.css';
 import toast, { Toaster } from 'react-hot-toast';
+import url from '../url.jsx';
 
 const RegisterVendor = () => {
     const userDetails = useSelector((state) => state.user.currentUser);
@@ -101,7 +102,7 @@ const RegisterVendor = () => {
                 imageURL: urls, // Add image URLs to vendor details
             };
 
-            const response = await axios.post('http://localhost:3000/api/vendor/addvendor', vendorData);
+            const response = await axios.post(`${url}/api/vendor/addvendor`, vendorData);
             if (response.data.success) {
                 toast.success('Vendor Registered Successfully');
                 
