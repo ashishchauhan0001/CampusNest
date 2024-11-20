@@ -29,6 +29,7 @@
     "nodemon": "^3.1.7",
     "razorpay": "^2.9.5",
     "react-material-ui-carousel": "^3.4.2",
+    "react-toastify": "^10.0.6",
     "swiper": "^11.1.14"
   }
 }

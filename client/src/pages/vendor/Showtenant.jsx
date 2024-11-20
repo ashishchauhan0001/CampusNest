@@ -5,6 +5,7 @@ import { Typography, Box, Grid, Card, CardContent, Avatar } from '@mui/material'
 import { GiConsoleController } from 'react-icons/gi';
 import "./showlist.css";
 import Dash from './dash';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Showtenant() {
     const [tenantData, setTenantData] = useState(null);
@@ -19,7 +20,7 @@ function Showtenant() {
     useEffect(() => {
         const checkTenant = async () => {
             if (!userId) {
-                alert('User ID not found. Please log in.');
+                toast.error('User ID not found. Please log in.');
                 return;
             }
 
@@ -55,7 +56,7 @@ function Showtenant() {
             });
 
             if (response.status === 200) {
-                alert(`Tenant request ${status} successfully.`);
+                toast.success(`Tenant request ${status} successfully.`);
                 // Update the local state to reflect the change
                 setTenantData(prevData =>
                     prevData.map(tenant =>
@@ -63,11 +64,12 @@ function Showtenant() {
                     )
                 );
             } else {
-                alert(`Failed to update the status. Please try again.`);
+                toast.error(`Failed to update the status. Please try again.`);
             }
         } catch (err) {
             console.error("Error updating tenant status:", err.message);
-            alert(`Error: ${err.message}`);
+    
+            toast.error(`Error: ${err.message}`);
         }
     };
 

@@ -9,11 +9,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import './property.css';
 import CommentsSection from '../components/CommentSection';
+import toast, { Toaster } from 'react-hot-toast';
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 const Property = () => {
   const userDetails = useSelector((state) => state.user.currentUser);
+  const profile = useSelector((state) => state.user.profile);
   const id = userDetails._id;
   const params = useParams();
   const [property, setProperty] = useState(null);
@@ -48,6 +50,12 @@ const Property = () => {
 
   const handleBookingRequest = async () => {
     try {
+      console.log(profile, 90)
+      if (!profile) {
+        toast.error("Please create your profile first!");
+        navigate('/build');
+        return;
+      }
       const response = await axios.get(`http://localhost:3000/api/tenant/gettenant/${id}`);
       if (response.status === 200) {
         const tenantData = response.data.tenant;
@@ -58,13 +66,14 @@ const Property = () => {
         };
 
         if (id === data.vendorId) {
-          alert('You cannot book your own property');
+          toast.error("You cannot book your own property!");
+
           return;
         }
 
         const postResponse = await axios.post('http://localhost:3000/api/request/addrequest', data);
         if (postResponse.status === 201) {
-          alert('Request sent successfully');
+          toast.success("Request sent successfully!");
         } else {
           console.error('Failed to store data:', postResponse.statusText);
         }
@@ -182,16 +191,16 @@ const Property = () => {
                 Request Property Tour
               </button>
             )}
-            
+
           </div>
         </div>
-      {/* Other property details here */}
-      <CommentsSection propertyID={property._id} />
+        {/* Other property details here */}
+        <CommentsSection propertyID={property._id} />
       </div>
       {/* Comment Section starts here */}
-      
-      
-  
+
+
+
     </div>
   );
 };
