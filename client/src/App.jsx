@@ -8,7 +8,7 @@ import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import Search from './pages/Search';
 import RegisterVendor from './pages/RegisterVendor';
-import Land from './pages/land';
+import Land from './pages/Land.jsx';
 import BuildProfile from './pages/BuildProfile';
 import Dash from './pages/vendor/dash';
 import Property from './pages/Property';
