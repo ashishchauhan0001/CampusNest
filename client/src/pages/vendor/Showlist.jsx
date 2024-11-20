@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Dash from './dash.jsx';
+import Dash from './Dash.jsx';
 import './showlist.css';
 import { useSelector } from 'react-redux';
 import Card from '../../components/Card.jsx';

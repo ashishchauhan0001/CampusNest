@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Typography, Box, Grid, Card, CardContent, Avatar } from '@mui/material';
 import { GiConsoleController } from 'react-icons/gi';
 import "./showlist.css";
-import Dash from './dash.jsx';
+import Dash from './Dash.jsx';
 import toast, { Toaster } from 'react-hot-toast';
 import url from '../../url.jsx';
 
