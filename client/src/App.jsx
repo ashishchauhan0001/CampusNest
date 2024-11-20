@@ -10,7 +10,7 @@ import Search from './pages/Search.jsx';
 import RegisterVendor from './pages/RegisterVendor.jsx';
 import Land from './pages/Land.jsx';
 import BuildProfile from './pages/BuildProfile.jsx';
-import Dash from './pages/vendor/dash.jsx';
+import Dash from './pages/vendor/Dash.jsx';
 import Property from './pages/Property.jsx';
 import Showlist from './pages/vendor/Showlist.jsx';
 import Showtenant from './pages/vendor/Showtenant.jsx';
