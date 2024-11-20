@@ -12,6 +12,7 @@ export default function Card({ listing }) {
   const [organizationCount, setOrganizationCount] = useState(0);
   const org = useSelector((state) => state.user.organisation);
   console.log(org,67);
+  const userId=useSelector((state)=>state.user.currentUser);
 
   useEffect(() => {
     if (org) {
@@ -40,7 +41,7 @@ export default function Card({ listing }) {
   return (
     <div className='bg-white shadow-md hover:shadow-lg  transition-shadow overflow-hidden rounded-lg  sm:w-[400px] '>
       {/* <Link to={`/listing/${listing._id}`}> */}
-      <Link to={`/property/${listing._id}`}>
+      <Link to={userId ? `/property/${listing._id}` : '/sign-in'}>
         {/* Image Section */}
         <img
           src={

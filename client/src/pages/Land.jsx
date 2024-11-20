@@ -15,10 +15,9 @@ SwiperCore.use([Navigation]);
 // const navigate=useNavigate();
 
 const images = [
-  "https://cdn.pixabay.com/photo/2024/06/14/19/14/house-8830418_1280.jpg",
-  "https://cdn.pixabay.com/photo/2024/04/27/05/58/ai-generated-8723070_1280.jpg",
-  "https://cdn.pixabay.com/photo/2018/09/25/09/17/sale-3701777_1280.jpg",
-  "https://cdn.pixabay.com/photo/2023/07/27/19/57/castle-8153987_1280.jpg",
+  "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?q=80&w=2962&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "/public/bg6.png",
 ];
 

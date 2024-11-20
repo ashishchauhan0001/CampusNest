@@ -44,6 +44,8 @@ export default function Header() {
             type="text"
             placeholder="Search..."
             className="w-32 md:w-64 outline-none px-2 text-gray-700"
+             minlength="2"
+            maxlength="12"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
