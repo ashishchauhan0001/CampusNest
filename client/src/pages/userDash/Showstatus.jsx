@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Side from "./side.jsx";
+import Side from "./Side.jsx";
 import { useSelector } from "react-redux";
 import PaymentButton from "../../components/PaymentButton.jsx";
 import url from '../../url.jsx';

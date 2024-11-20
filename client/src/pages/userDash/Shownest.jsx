@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FaWifi, FaCar, FaTshirt, FaUtensils, FaSnowflake, FaDumbbell, FaCouch, FaBolt, FaBroom } from 'react-icons/fa';
-import Side from './side.jsx';
+import Side from './Side.jsx';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
