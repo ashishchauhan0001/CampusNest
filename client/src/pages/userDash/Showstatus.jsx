@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Side from "./side";
+import Side from "./side.jsx";
 import { useSelector } from "react-redux";
-import PaymentButton from "../../components/PaymentButton";
+import PaymentButton from "../../components/PaymentButton.jsx";
 import url from '../../url.jsx';
 
 const Showstatus = () => {

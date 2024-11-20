@@ -8,7 +8,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import './property.css';
-import CommentsSection from '../components/CommentSection';
+import CommentsSection from '../components/CommentSection.jsx';
 import toast, { Toaster } from 'react-hot-toast';
 import url from '../url.jsx';
 

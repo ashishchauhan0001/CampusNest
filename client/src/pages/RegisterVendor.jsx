@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, TextField, Grid } from '@mui/material';
-import { storage } from '../firebase'; // import Firebase storage
+import { storage } from '../firebase.js'; // import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './vend.css';
 import toast, { Toaster } from 'react-hot-toast';

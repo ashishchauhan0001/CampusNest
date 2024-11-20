@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FaWifi, FaCar, FaTshirt, FaUtensils, FaSnowflake, FaDumbbell, FaCouch, FaBolt, FaBroom } from 'react-icons/fa';
-import Side from './side';
+import Side from './side.jsx';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
-import CommentForm from '../../components/CommentForm';
+import CommentForm from '../../components/CommentForm.jsx';
 import url from '../../url.jsx';
 
 function Shownest() {

@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import Map from "../components/Map";
-import About from "../components/About";
-import SearchBar from "../components/SearchBar";
+import About from "../components/About.jsx";
 import { Typewriter } from "react-simple-typewriter";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import { Link, useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
+
 
 SwiperCore.use([Navigation]);
 
